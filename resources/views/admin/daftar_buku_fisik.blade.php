@@ -137,9 +137,13 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="jenis_buku">Jenis Buku</label>
-                                                                    <input type="text" class="form-control"
-                                                                        id="jenis_buku" name="jenis_buku"
-                                                                        value="{{ $buku->jenis_buku }}" required>
+                                                                    <select class="form-control" id="jenis_buku" name="jenis_buku" required>
+                                                                        @foreach ($jenisBuku as $jenis)
+                                                                        <option value="{{ $jenis->jenis_buku }}" {{ $buku->jenis_buku == $jenis->jenis_buku ? 'selected' : '' }}>
+                                                                            {{ $jenis->jenis_buku }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                    </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="penulis_buku">Penulis Buku</label>
@@ -169,7 +173,7 @@
                                                                     <label for="status_buku">Status Buku</label>
                                                                     <select class="form-control" id="status_buku" name="status" required>
                                                                         <option value="tersedia" {{ $buku->status == 'tersedia' ? 'selected' : '' }}>Tersedia</option>
-                                                                        <option value="tidak_tersedia" {{ $buku->status == 'tidak_tersedia' ? 'selected' : '' }}>Tidak Tersedia</option>
+                                                                        <option value="tidak tersedia" {{ $buku->status == 'tidak_tersedia' ? 'selected' : '' }}>Tidak Tersedia</option>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">

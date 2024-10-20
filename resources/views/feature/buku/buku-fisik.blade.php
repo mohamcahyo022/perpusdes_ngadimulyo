@@ -6,12 +6,12 @@
 <div class="inner-banner inner-banner-bg">
     <div class="container">
         <div class="inner-title text-center">
-            <h3>Buku Offline</h3>
+            <h3>Buku Fisik</h3>
             <ul>
                 <li>
                     <a href="index.html">Home</a>
                 </li>
-                <li>Buku Offline</li>
+                <li>Buku Fisik</li>
             </ul>
         </div>
     </div>
@@ -25,163 +25,119 @@
             <div class="col-lg-5">
                 <div class="section-title mt-rs-20">
                     <span>Cari Buku Berdasarkan Judul</span>
-                    <h2>Subscribe our newsletter</h2>
+                    <h2>Pencarian</h2>
                 </div>
             </div>
             <div class="col-lg-7">
-                <form class="newsletter-form" data-toggle="validator" method="POST">
-                    <input type="email" class="form-control" placeholder="Masukkan Judul Buku Yang Akan Dicari..." name="EMAIL" required autocomplete="off">
+                <form class="newsletter-form" id="search-form" method="GET">
+                    @csrf
+                    <input type="text" class="form-control" placeholder="Masukkan Judul Buku Yang Akan Dicari..." name="search" id="search-input">
                     <button class="subscribe-btn" type="submit">
-                        Cari Buku  <i class="flaticon-paper-plane"></i>
+                        Cari Buku <i class="flaticon-paper-plane"></i>
                     </button>
-                    <div id="validator-newsletter" class="form-result"></div>
                 </form>
             </div>
         </div>
     </div>
 </div>
 <!-- Newsletter Area End -->
-<!-- Events Area -->
 <div class="event-area pt-100 pb-100">
-    <div class="container">
-        <div class="section-title text-center mb-45">
-            <h2>Upcoming events schedule</h2>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="event-item box-shadow">
-                    <div class="event-img">
-                        <a href="event-details.html">
-                            <img src="assets/images/events/event-img1.jpg" alt="Events" />
-                        </a>
-                    </div>
-                    <div class="event-content">
-                        <ul class="event-list">
-                            <li><i class="ri-calendar-todo-fill"></i> 02 Jan 2024</li>
-                            <li><i class="ri-map-pin-fill"></i> Aberdeen City, U.k</li>
-                            <li><i class="ri-time-fill"></i> 12:00 AM</li>
-                        </ul>
-                        <h3><a href="event-details.html">University admissions could face emergency controls</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit necessitatibus</p>
-                    </div>
-                </div>
+    <div class="container" id="results-container">
+        @if($books->isNotEmpty())
+            <div class="section-title text-center mb-45">
+                <h2>Daftar Buku</h2>
             </div>
+            <div class="row" id="book-list">
+                @foreach ($books as $book)
+                    <div class="col-lg-6">
+                        <div class="event-item box-shadow">
+                            <div class="event-img">
+                                <a href="event-details.html">
+                                    <img src="{{ asset('storage/' . $book->cover_buku) }}" alt="{{$book->judul_buku }}" />
+                                </a>
+                            </div>
+                            <div class="event-content">
+                                <h3><a href="event-details.html">{{$book->judul_buku}}</a></h3>
+                                <p><i class="ri-file-list-line text-info"></i> Jenis Buku: <small class="text-primary">{{$book->jenis_buku}}</small></p>
+                                <p><i class="ri-user-line text-info"></i> Penulis: <small class="text-primary">{{$book->penulis}}</small></p>
+                                <p><i class="ri-git-repository-commits-line text-info"></i> Penerbit: <small class="text-primary">{{$book->penerbit}}</small></p>
+                                <p><i class="ri-time-line text-info"></i> Tahun Terbit: <small class="text-primary">{{$book->tahun_terbit}}</small></p>
+                                <p><i class="ri-arrow-left-right-line text-info"></i> Nomor: <span class="badge bg-primary">{{$book->nomor_buku}}</span></p>
+                                <p>
+                                    <i class="ri-git-repository-line text-info"></i>
+                                    Status Buku:
+                                    @if($book->status == 'tersedia')
+                                        <span class="badge bg-success">{{ $book->status }}</span>
+                                    @else
+                                        <span class="badge bg-danger">{{ $book->status }}</span>
+                                    @endif
+                                </p>
 
-            <div class="col-lg-6">
-                <div class="event-item box-shadow">
-                    <div class="event-img">
-                        <a href="event-details.html">
-                            <img src="assets/images/events/event-img2.jpg" alt="Events" />
-                        </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="event-content">
-                        <ul class="event-list">
-                            <li><i class="ri-calendar-todo-fill"></i> 03 Jan 2024</li>
-                            <li><i class="ri-map-pin-fill"></i> Aberdeen City, U.k</li>
-                            <li><i class="ri-time-fill"></i> 11:00 AM</li>
-                        </ul>
-                        <h3><a href="event-details.html">As learning moves online trigger warnings must too</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit necessitatibus</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
-
-            <div class="col-lg-6">
-                <div class="event-item box-shadow">
-                    <div class="event-img">
-                        <a href="event-details.html">
-                            <img src="assets/images/events/event-img3.jpg" alt="Events" />
-                        </a>
-                    </div>
-                    <div class="event-content">
-                        <ul class="event-list">
-                            <li><i class="ri-calendar-todo-fill"></i> 05 Jan 2024</li>
-                            <li><i class="ri-map-pin-fill"></i> Aberdeen City, U.k</li>
-                            <li><i class="ri-time-fill"></i> 09:00 AM</li>
-                        </ul>
-                        <h3><a href="event-details.html">Java programming masterclass name for software developers</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit necessitatibus</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="event-item box-shadow">
-                    <div class="event-img">
-                        <a href="event-details.html">
-                            <img src="assets/images/events/event-img4.jpg" alt="Events" />
-                        </a>
-                    </div>
-                    <div class="event-content">
-                        <ul class="event-list">
-                            <li><i class="ri-calendar-todo-fill"></i> 07 Jan 2024</li>
-                            <li><i class="ri-map-pin-fill"></i> Aberdeen City, U.k</li>
-                            <li><i class="ri-time-fill"></i> 08:00 AM</li>
-                        </ul>
-                        <h3><a href="event-details.html">Online learning can prepare to students for fast-changing</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit necessitatibus</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="event-item box-shadow">
-                    <div class="event-img">
-                        <a href="event-details.html">
-                            <img src="assets/images/events/event-img5.jpg" alt="Events" />
-                        </a>
-                    </div>
-                    <div class="event-content">
-                        <ul class="event-list">
-                            <li><i class="ri-calendar-todo-fill"></i> 11 Jan 2024</li>
-                            <li><i class="ri-map-pin-fill"></i> Aberdeen City, U.k</li>
-                            <li><i class="ri-time-fill"></i> 11:00 AM</li>
-                        </ul>
-                        <h3><a href="event-details.html">The complete digital marketing course - 12 courses in 1</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit necessitatibus</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="event-item box-shadow">
-                    <div class="event-img">
-                        <a href="event-details.html">
-                            <img src="assets/images/events/event-img6.jpg" alt="Events" />
-                        </a>
-                    </div>
-                    <div class="event-content">
-                        <ul class="event-list">
-                            <li><i class="ri-calendar-todo-fill"></i> 15 Jan 2024</li>
-                            <li><i class="ri-map-pin-fill"></i> Aberdeen City, U.k</li>
-                            <li><i class="ri-time-fill"></i> 10:00 AM</li>
-                        </ul>
-                        <h3><a href="event-details.html">The python mega course: build 10 real world applications</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit necessitatibus</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-12 col-md-12 text-center">
-                <div class="pagination-area">
-                    <a href="event.html" class="prev page-numbers">
-                        <i class="flaticon-left-arrow"></i>
-                    </a>
-
-                    <span class="page-numbers current" aria-current="page">1</span>
-                    <a href="event.html" class="page-numbers">2</a>
-                    <a href="event.html" class="page-numbers">3</a>
-
-                    <a href="event.html" class="next page-numbers">
-                        <i class="flaticon-chevron"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+        @else
+            <p>Tidak ada hasil ditemukan.</p>
+        @endif
     </div>
 </div>
 <!-- Events Area End -->
 
+<!-- JavaScript for AJAX Search -->
+<script>
+    document.getElementById('search-form').addEventListener('submit', function(e) {
+        e.preventDefault();
 
+        const searchValue = document.getElementById('search-input').value;
+
+        fetch(`{{ route('buku.ajaxSearch') }}?search=${encodeURIComponent(searchValue)}`)
+            .then(response => response.json())
+            .then(data => {
+                const bookList = document.getElementById('book-list');
+                bookList.innerHTML = '';
+
+                if (data.length > 0) {
+                    data.forEach(book => {
+                        const bookElement = `
+                            <div class="col-lg-6">
+                                <div class="event-item box-shadow">
+                                    <div class="event-img">
+                                        <a href="event-details.html">
+                                            <img src="storage/${book.cover_buku}" alt="${book.judul_buku}" />
+                                        </a>
+                                    </div>
+                                    <div class="event-content">
+                                        <h3><a href="event-details.html">${book.judul_buku}</a></h3>
+                                        <p><i class="ri-file-list-line text-info"></i> Jenis Buku: <small class="text-primary">${book.jenis_buku}</small></p>
+                                        <p><i class="ri-user-line text-info"></i> Penulis: <small class="text-primary">${book.penulis}</small></p>
+                                        <p><i class="ri-git-repository-commits-line text-info"></i> Penerbit: <small class="text-primary">${book.penerbit}</small></p>
+                                        <p><i class="ri-time-line text-info"></i> Tahun Terbit: <small class="text-primary">${book.tahun_terbit}</small></p>
+                                        <p><i class="ri-arrow-left-right-line text-info"></i> Nomor: <span class="badge bg-primary">${book.nomor_buku}</span></p>
+                                        <p><i class="ri-git-repository-line text-info"></i> Status Buku: <span class="badge bg-success">${book.status}</span></p>
+                                    </div>
+                                </div>
+                            </div>`;
+                        bookList.innerHTML += bookElement;
+                    });
+                } else {
+                    bookList.innerHTML = '<p>Tidak ada hasil ditemukan.</p>';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+<script>
+    const statusBadge = document.getElementById('status-badge');
+
+    if (statusBadge.textContent === 'tersedia') {
+        statusBadge.classList.add('bg-success');
+        statusBadge.classList.remove('bg-danger');
+    } else {
+        statusBadge.classList.add('bg-danger');
+        statusBadge.classList.remove('bg-success');
+    }
+</script>
 
 @endsection

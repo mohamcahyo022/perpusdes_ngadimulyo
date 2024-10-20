@@ -61,5 +61,6 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
         Route::put('/buku/{id}', [PhysicBookController::class, 'update_fisik'])->name('buku.fisik.update');
         Route::delete('/buku/{id}', [PhysicBookController::class, 'destroy'])->name('buku.fisik.hapus');
     //User
-        Route::get('/buku-fisik', [PhysicBookController::class, 'index']);
+        Route::get('/buku-fisik', [PhysicBookController::class, 'index'])->name('buku.fisik');
         Route::get('/buku-fisik-detail', [PhysicBookController::class, 'detail'])->name('buku.fisik.detail');
+        Route::get('/search', [PhysicBookController::class, 'ajaxSearch'])->name('buku.ajaxSearch');

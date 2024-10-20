@@ -54,10 +54,21 @@
                                     <label for="judul">Judul Buku</label>
                                     <input type="text" class="form-control" name="judul_buku" placeholder="Masukkan Judul Buku">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="jenis_buku">Jenis Buku</label>
+                                    <select class="form-control" name="jenis_buku">
+                                        @foreach ($jenisBuku as $jenis)
+                                            <option value="{{ $jenis->jenis_buku }}">{{ $jenis->jenis_buku }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="jenis_buku">Jenis Buku</label>
                                     <input type="text" class="form-control" name="jenis_buku" placeholder="Masukkan Jenis Buku">
                                 </div>
+
                                 <div class="form-group">
                                     <label for="penulis_buku">Penulis</label>
                                     <input type="text" class="form-control" name="penulis_buku" placeholder="Masukkan Penulis Buku">
@@ -71,11 +82,11 @@
                                     <input type="text" class="form-control" name="tahun_terbit" placeholder="Masukkan Tahun Terbit">
                                 </div>
                                 <div class="form-group">
-                                    <label for="tahun_terbit">Nomor Buku</label>
-                                    <input type="text" class="form-control" name="nomor_buku" placeholder="Masukkan Tahun Terbit">
+                                    <label for="nomor_buku">Nomor Buku/Rak</label>
+                                    <input type="text" class="form-control" name="nomor_buku" placeholder="Masukkan Tahun Nomor Buku dan rak buku">
                                 </div>
                                 <div class="form-group">
-                                    <label for="tahun_terbit">Status</label>
+                                    <label for="status">Status</label>
                                     <select class="form-control" name="status">
                                         <option value="tersedia">Tersedia</option>
                                         <option value="tidak tersedia">Tidak Tersedia</option>

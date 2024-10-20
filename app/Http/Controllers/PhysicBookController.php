@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku_Fisik;
+use App\Models\Jenis_Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,22 +11,38 @@ class PhysicBookController extends Controller
 {
     public function index()
     {
-        return view('feature.buku.buku-fisik');
+        $books = Buku_Fisik::paginate(10);
+        return view('feature.buku.buku-fisik', compact('books'));
     }
 
-        public function detail()
+    public function detail()
     {
         return view('feature.buku.buku-detail');
     }
 
+    public function ajaxSearch(Request $request)
+    {
+        $search = $request->input('search');
+
+        $books = Buku_Fisik::when($search, function ($query) use ($search) {
+            return $query->where('judul_buku', 'like', '%' . $search . '%');
+        })->get();
+
+        return response()->json($books);
+    }
+
+
+
     // Halaman Admin
     public function daftar_buku_fisik(){
         $bukus = Buku_Fisik::all();
-        return view('admin.daftar_buku_fisik', compact('bukus'));
+        $jenisBuku = Jenis_Buku::all();
+        return view('admin.daftar_buku_fisik', compact('bukus', 'jenisBuku'));
     }
 
     public function tambah_buku_fisik(){
-        return view('admin.tambah_buku_fisik');
+        $jenisBuku = Jenis_Buku::all();
+        return view('admin.tambah_buku_fisik', compact('jenisBuku'));
     }
 
     public function store(Request $request)
