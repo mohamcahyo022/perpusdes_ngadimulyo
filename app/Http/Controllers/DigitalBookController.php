@@ -31,7 +31,8 @@ class DigitalBookController extends Controller
 
     public function tambah_buku_digital()
     {
-        return view('admin.tambah_buku_digital');
+        $bukus = Jenis_Buku::all();
+        return view('admin.tambah_buku_digital', compact('bukus'));
     }
 
     public function daftar_buku_dibaca()
@@ -137,6 +138,42 @@ class DigitalBookController extends Controller
     {
         // Temukan buku berdasarkan ID dan hapus
         $buku = Buku_Digital::findOrFail($id);
+        $buku->delete();
+
+        return redirect()->back()->with('success', 'Data buku berhasil dihapus!');
+    }
+    public function tambah_jenis_buku(Request $request)
+    {
+        $request->validate([
+            'jenis_buku' => 'required'
+        ]);
+        $buku = new Jenis_Buku();
+        $buku->jenis_buku = $request->input('jenis_buku');
+
+        // Simpan data ke database
+        $buku->save();
+
+        return redirect()->back()->with('success', 'Data jenis buku berhasil disimpan!');
+    }
+
+    public function edit_jenis_buku(Request $request, $id)
+    {
+        // Temukan buku berdasarkan ID dan hapus
+        $request->validate([
+            'jenis_buku' => 'required'
+        ]);
+        $buku = Jenis_Buku::findOrFail($id);
+        $buku->jenis_buku = $request->input('jenis_buku');
+
+        // Simpan data ke database
+        $buku->save();
+
+        return redirect()->back()->with('success', 'Data buku berhasil dihapus!');
+    }
+    public function hapus_jenis_buku($id)
+    {
+        // Temukan buku berdasarkan ID dan hapus
+        $buku = Jenis_Buku::findOrFail($id);
         $buku->delete();
 
         return redirect()->back()->with('success', 'Data buku berhasil dihapus!');

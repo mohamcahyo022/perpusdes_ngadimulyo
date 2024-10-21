@@ -16,20 +16,19 @@
       <div class="sidebar-heading">
         Features
       </div>
-      <li class="nav-item {{ Request::is('tambah-buku-digital','daftar-buku-digital','daftar-sering-dibaca','daftar-terfavorit','daftar-jenis-buku') ? 'active' : '' }}">
+      <li class="nav-item {{ Request::is('tambah-buku-digital','daftar-buku-digital') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
           aria-expanded="true" aria-controls="collapseBootstrap1">
           <i class="far fa-fw fa-window-maximize"></i>
           <span>Buku Digital</span>
         </a>
-        <div id="collapseBootstrap1" class="collapse {{ Request::is('tambah-buku-digital','daftar-buku-digital','daftar-buku-dibaca','daftar-buku-terfavorit','daftar-jenis-buku') ? 'show' : '' }}" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <div id="collapseBootstrap1" class="collapse {{ Request::is('tambah-buku-digital','daftar-buku-digital') ? 'show' : '' }}" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Buku Digital</h6>
             <a class="collapse-item {{ Request::is('tambah-buku-digital') ? 'active' : '' }}" href="{{ url('/tambah-buku-digital') }}">Tambah Buku Digital</a>
             <a class="collapse-item {{ Request::is('daftar-buku-digital') ? 'active' : '' }}" href="{{ url('/daftar-buku-digital') }}">Daftar Buku Digital</a>
             <a class="collapse-item {{ Request::is('daftar-buku-dibaca') ? 'active' : '' }}" href="{{ url('/daftar-buku-dibaca') }}">Daftar Sering Dibaca</a>
             <a class="collapse-item {{ Request::is('daftar-buku-terfavorit') ? 'active' : '' }}" href="{{ url('/daftar-buku-terfavorit') }}">Daftar Terfavorit</a>
-            <a class="collapse-item {{ Request::is('daftar-jenis-buku') ? 'active' : '' }}" href="{{ url('/daftar-jenis-buku') }}">Daftar Jenis Buku</a>
           </div>
         </div>
       </li>
@@ -46,6 +45,12 @@
             <a class="collapse-item {{ Request::is('daftar-buku-fisik') ? 'active' : '' }}" href="{{ url('/daftar-buku-fisik') }}">Daftar Buku Fisik</a>
           </div>
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('daftar-jenis-buku') ? 'active' : '' }}" href="/daftar-jenis-buku" >
+          <i class="fas fa-fw fa-table"></i>
+          <span>Daftar Jenis Buku</span>
+        </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ Request::is('masukan') ? 'active' : '' }}" href="/masukan" >

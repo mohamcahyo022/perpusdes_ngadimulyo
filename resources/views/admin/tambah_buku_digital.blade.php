@@ -56,7 +56,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="jenis_buku">Jenis Buku</label>
-                                        <input type="text" class="form-control" name="jenis_buku" placeholder="Masukkan Jenis Buku">
+                                        <select class="form-control" id="jenis_buku" name="jenis_buku" required>
+                                            @foreach ($bukus as $jenis)
+                                                <option value="{{ $jenis->jenis_buku }}">{{ $jenis->jenis_buku }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="penulis_buku">Penulis</label>

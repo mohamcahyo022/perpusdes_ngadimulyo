@@ -62,7 +62,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" method="POST" enctype="multipart/form-data">
+                                    <form action="/tambah-jenis-buku" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <label for="judul_buku">Jenis Buku</label>
@@ -81,17 +81,21 @@
                                     <tr>
                                         <th class="text-center">Nomor</th>
                                         <th class="text-center">Jenis Buku</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
+                                    @php
+                                        $no=1;
+                                    @endphp
                                     @foreach($bukus as $jenis)
                                     <tr>
-                                        <td class="text-center">{{ $jenis->nomor }}</td>
+                                        <td class="text-center">{{ $no++ }}</td>
                                         <td class="text-center">{{ $jenis->jenis_buku }}</td>
-                                        <td>
+                                        <td class="text-center">
                                             <a class="btn btn-warning btn-sm text-white" style="cursor: pointer;" data-toggle="modal" data-target="#editModal">Edit</a>
-                                            <form action="" method="POST" style="display:inline;">
+                                            <form action="{{ route('jenis.hapus', $jenis->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
@@ -110,42 +114,12 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="" method="POST" enctype="multipart/form-data">
+                                                        <form action="{{ route('jenis.edit', $jenis->id) }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="form-group">
-                                                                <label for="judul_buku">Judul Buku</label>
-                                                                <input type="text" class="form-control" id="judul_buku" name="judul_buku" value="" required>
-                                                            </div>
-                                                            <div class="form-group">
                                                                 <label for="jenis_buku">Jenis Buku</label>
                                                                 <input type="text" class="form-control" id="jenis_buku" name="jenis_buku" value="" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="penulis_buku">Penulis Buku</label>
-                                                                <input type="text" class="form-control" id="penulis_buku" name="penulis_buku" value="" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="penerbit">Penerbit</label>
-                                                                <input type="text" class="form-control" id="penerbit" name="penerbit" value="" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="tahun_terbit">Tahun Terbit</label>
-                                                                <input type="number" class="form-control" id="tahun_terbit" name="tahun_terbit" value="" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="file_buku">File Buku</label>
-                                                                <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input" id="file_buku" name="file_buku" aria-describedby="inputGroupFileAddon01">
-                                                                    <label class="custom-file-label" for="file_buku">Choose file</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="cover_buku">Cover Buku</label>
-                                                                <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input" id="cover_buku" name="cover_buku" aria-describedby="inputGroupFileAddon01">
-                                                                    <label class="custom-file-label" for="cover_buku">Choose file</label>
-                                                                </div>
                                                             </div>
                                                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                                         </form>

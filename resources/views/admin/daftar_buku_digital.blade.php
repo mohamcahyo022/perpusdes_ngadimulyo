@@ -95,7 +95,7 @@
                                         <td class="text-center" >
                                             <img src="{{ asset('storage/' . $buku->cover_buku) }}" alt="Cover Buku" style="width: 100px; height: auto;">
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <a class="btn btn-warning btn-sm text-white" style="cursor: pointer;" data-toggle="modal" data-target="#editModal{{ $buku->id }}">Edit</a>
                                             <form action="{{ route('buku.hapus', $buku->id) }}" method="POST" style="display:inline;">
                                                 @csrf

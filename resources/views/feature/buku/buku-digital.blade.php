@@ -5,12 +5,12 @@
 <div class="inner-banner inner-banner-bg10">
     <div class="container">
         <div class="inner-title text-center">
-            <h3>All Courses</h3>
+            <h3>Buku Digital</h3>
             <ul>
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="/">Home</a>
                 </li>
-                <li>Courses</li>
+                <li>Buku Digital</li>
             </ul>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-8 col-md-6">
                     <div class="product-title">
-                        <h3>We found  <span> 09 </span>courses available for you</h3>
+                        <h3>Kami Menemukan  <span> 09 </span>Buku Untuk Mu</h3>
                     </div>
                 </div>
 
@@ -44,12 +44,12 @@
             @foreach ($bukus as $buku)
             <div class="col-lg-4 col-md-6">
                 <div class="courses-item">
-                    <a href="courses-details.html">
+                    <a href="{{ route('buku.digital.detail',$buku->id) }}">
                         <img src="{{ asset('storage/' . $buku->cover_buku) }}" alt="Courses"/>
                     </a>
                     <div class="content">
-                        <a href="courses.html" class="tag-btn">{{ $buku->jenis_buku }}</a>
-                        <h3><a href="courses-details.html">{{ $buku->judul_buku }}</a></h3>
+                        <a href="#" class="tag-btn">{{ $buku->jenis_buku }}</a>
+                        <h3><a href="{{ route('buku.digital.detail',$buku->id) }}">{{ $buku->judul_buku }}</a></h3>
                         <ul class="course-list">
                             <li><i class="ri-group-line"></i> 4 Orang</li>
                             <li><i class="ri-star-fill"></i> 67 favorit</li>
