@@ -13,6 +13,7 @@
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/ruang-admin.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> --}}
@@ -37,6 +38,7 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Page level custom scripts -->
     <script>
@@ -56,6 +58,51 @@
                     }
                 });
             });
+    </script>
+
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: "{{ session('success') }}",
+            icon: 'success',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+            position: 'center',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    </script>
+    @endif
+
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Apakah kamu yakin?',
+                text: "Data yang dihapus tidak bisa dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus',
+                cancelButtonText: 'Batal',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit form jika konfirmasi hapus diberikan
+                    document.getElementById('deleteForm' + id).submit();
+                }
+            });
+        }
     </script>
 
 </body>

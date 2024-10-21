@@ -76,7 +76,7 @@ class PhysicBookController extends Controller
         // Simpan data ke database
         $buku->save();
 
-        return redirect()->back()->with('success', 'Data buku berhasil disimpan!');
+        return redirect()->route('daftar.buku.fisik')->with('success', 'Data buku berhasil ditambahkan');
     }
 
     public function update_fisik(Request $request, $id)
@@ -115,7 +115,7 @@ class PhysicBookController extends Controller
 
         $buku->save();
 
-        return redirect()->back()->with('success', 'Data buku berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Data buku berhasil diperbarui');
     }
 
 
@@ -125,7 +125,7 @@ class PhysicBookController extends Controller
         $buku = Buku_Fisik::findOrFail($id);
         $buku->delete();
 
-        return redirect()->back()->with('success', 'Data buku berhasil dihapus!');
+        return redirect()->back()->with('success', 'Data buku berhasil dihapus');
     }
 
 

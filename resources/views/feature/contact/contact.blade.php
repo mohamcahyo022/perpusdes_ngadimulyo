@@ -60,61 +60,40 @@
                     <h2>Ready to get started?</h2>
                 </div>
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <form action="/kirim-masukkan" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" name="name" id="name" class="form-control" required data-error="Please Enter Your Name" placeholder="Name">
+                                    <input type="text" name="nama" id="name" class="form-control" required data-error="Nama Wajib Diisi" placeholder="Nama">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="email" name="email" id="email" class="form-control" required data-error="Please Enter Your Email" placeholder="Email">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <input type="text" name="phone_number" id="phone_number" required data-error="Please Enter Your number" class="form-control" placeholder="Phone Number">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <input type="text" name="msg_subject" id="msg_subject" class="form-control" required data-error="Please Enter Your Subject" placeholder="Your Subject">
+                                    <input type="email" name="email" id="email" class="form-control" required data-error="Email wajib diisi dan masukkan email dengan benar" placeholder="Email">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <textarea name="message" class="form-control" id="message" cols="30" rows="7" required data-error="Write your message" placeholder="Your Message"></textarea>
+                                    <textarea name="pesan" class="form-control" id="message" cols="30" rows="7" required data-error="Pesan wajib diisi" placeholder="Tulis Masukkan atau Saran"></textarea>
                                     <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="agree-label">
-                                    <input type="checkbox" id="chb1">
-                                    <label for="chb1">
-                                        Accept <a href="terms-condition.html">Terms & Conditions</a> And <a href="privacy-policy.html">Privacy Policy.</a>
-                                    </label>
                                 </div>
                             </div>
 
                             <div class="col-lg-12 col-md-12">
                                 <button type="submit" class="default-btn">
-                                    Send Message
+                                    Kirim Pesan
                                 </button>
-                                <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                <div class="clearfix"></div>
+                                {{-- <div id="msgSubmit" class="h3 text-center hidden"></div> --}}
+                                {{-- <div class="clearfix"></div> --}}
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

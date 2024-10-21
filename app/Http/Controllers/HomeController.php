@@ -18,16 +18,7 @@ class HomeController extends Controller
         return view('feature.about.about');
     }
 
-    public function contact()
-    {
-        return view('feature.contact.contact');
-    }
-
     // Admin
-
-    public function kontak_us(){
-        return view('admin.kontak_us');
-    }
 
     public function kelola_user(){
         return view('admin.daftar_user');

@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="assets/css/responsive.css">
         <!-- Theme Dark CSS -->
         <link rel="stylesheet" href="assets/css/theme-dark.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
 
         <!-- Title -->
         <title>@yield('title')</title>
@@ -39,4 +41,34 @@
         <script src="assets/js/plugins.js"></script>
         <!-- Custom  JS -->
         <script src="assets/js/custom.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        @if(session('success'))
+        <script>
+            Swal.fire({
+                title: 'Success!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+                position: 'center',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+        </script>
+        @endif
+
+        @if ($errors->any())
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '{{ $errors->first() }}',
+                });
+            </script>
+        @endif
     </body>

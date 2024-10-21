@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PhysicBookController;
 use App\Http\Controllers\DigitalBookController;
-use App\Http\Controllers\RegisterController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -29,14 +30,18 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 //Dashboard
     //Admin
         Route::get('/admin', [UserController::class, 'index']);
-        Route::get('/masukan', [HomeController::class, 'kontak_us']);
         Route::get('/kelol-user', [HomeController::class, 'kelola_user']);
+    // Masukkan
+        Route::get('/daftar-masukan', [ContactUsController::class, 'kontak_us']);
+        Route::post('/kirim-masukkan', [ContactUsController::class, 'store'])->name('masukkan.store');
+        Route::delete('/masukkan/{id}', [ContactUsController::class, 'destroy'])->name('masukkan.hapus');
+
 
 
     //User
         Route::get('/', [HomeController::class, 'index']);
         Route::get('/about', [HomeController::class, 'about']);
-        Route::get('/contact', [HomeController::class, 'contact']);
+        Route::get('/contact', [ContactUsController::class, 'contact']);
 
 //Digital Book
     //Admin
@@ -59,7 +64,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 //Offline Book
     //Admin
-        Route::get('/daftar-buku-fisik', [PhysicBookController::class, 'daftar_buku_fisik']);
+        Route::get('/daftar-buku-fisik', [PhysicBookController::class, 'daftar_buku_fisik'])->name('daftar.buku.fisik');
         Route::get('/tambah-buku-fisik', [PhysicBookController::class, 'tambah_buku_fisik']);
         Route::post('/tambah-buku-fisik-store', [PhysicBookController::class, 'store']);
         Route::put('/buku/{id}', [PhysicBookController::class, 'update_fisik'])->name('buku.fisik.update');
@@ -68,3 +73,4 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
         Route::get('/buku-fisik', [PhysicBookController::class, 'index'])->name('buku.fisik');
         Route::get('/buku-fisik-detail', [PhysicBookController::class, 'detail'])->name('buku.fisik.detail');
         Route::get('/search', [PhysicBookController::class, 'ajaxSearch'])->name('buku.ajaxSearch');
+

@@ -65,11 +65,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="jenis_buku">Jenis Buku</label>
-                                    <input type="text" class="form-control" name="jenis_buku" placeholder="Masukkan Jenis Buku">
-                                </div>
-
-                                <div class="form-group">
                                     <label for="penulis_buku">Penulis</label>
                                     <input type="text" class="form-control" name="penulis_buku" placeholder="Masukkan Penulis Buku">
                                 </div>

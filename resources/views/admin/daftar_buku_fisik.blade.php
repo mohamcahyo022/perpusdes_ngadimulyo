@@ -101,13 +101,11 @@
                                                     <a class="btn btn-warning btn-sm text-white" style="cursor: pointer;"
                                                         data-toggle="modal"
                                                         data-target="#editModal{{ $buku->id }}">Edit</a>
-                                                    <form action="{{ route('buku.fisik.hapus', $buku->id) }}" method="POST"
-                                                        style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
-                                                    </form>
+                                                        <form id="deleteForm{{ $buku->id }}" action="{{ route('buku.fisik.hapus', $buku->id) }}" method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $buku->id }})">Hapus</button>
+                                                        </form>
                                                 </td>
                                             </tr>
 

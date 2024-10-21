@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Buku_Kontak extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nama',
+        'email',
+        'pesan',
+    ];
 }

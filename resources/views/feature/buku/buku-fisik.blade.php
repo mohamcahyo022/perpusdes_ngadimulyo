@@ -52,7 +52,7 @@
                     <div class="col-lg-6">
                         <div class="event-item box-shadow">
                             <div class="event-img">
-                                <a href="event-details.html">
+                                <a>
                                     <img src="{{ asset('storage/' . $book->cover_buku) }}" alt="{{$book->judul_buku }}" />
                                 </a>
                             </div>
@@ -62,7 +62,7 @@
                                 <p><i class="ri-user-line text-info"></i> Penulis: <small class="text-primary">{{$book->penulis}}</small></p>
                                 <p><i class="ri-git-repository-commits-line text-info"></i> Penerbit: <small class="text-primary">{{$book->penerbit}}</small></p>
                                 <p><i class="ri-time-line text-info"></i> Tahun Terbit: <small class="text-primary">{{$book->tahun_terbit}}</small></p>
-                                <p><i class="ri-arrow-left-right-line text-info"></i> Nomor: <span class="badge bg-primary">{{$book->nomor_buku}}</span></p>
+                                <p><i class="ri-arrow-left-right-line text-info"></i> Nomor Buku/Rak: <span class="badge bg-primary">{{$book->nomor_buku}}</span></p>
                                 <p>
                                     <i class="ri-git-repository-line text-info"></i>
                                     Status Buku:
@@ -81,6 +81,42 @@
         @else
             <p>Tidak ada hasil ditemukan.</p>
         @endif
+
+        <div class="col-lg-12 col-md-12 text-center">
+            <div class="pagination-area">
+                <!-- Tombol Previous -->
+                @if ($books->onFirstPage())
+                    <span class="prev page-numbers disabled">
+                        <i class="flaticon-left-arrow"></i>
+                    </span>
+                @else
+                    <a href="{{ $books->previousPageUrl() }}" class="prev page-numbers">
+                        <i class="flaticon-left-arrow"></i>
+                    </a>
+                @endif
+
+                <!-- Link Nomor Halaman -->
+                @foreach ($books->links()->elements[0] as $page => $url)
+                    @if ($page == $books->currentPage())
+                        <span class="page-numbers current" aria-current="page">{{ $page }}</span>
+                    @else
+                        <a href="{{ $url }}" class="page-numbers">{{ $page }}</a>
+                    @endif
+                @endforeach
+
+                <!-- Tombol Next -->
+                @if ($books->hasMorePages())
+                    <a href="{{ $books->nextPageUrl() }}" class="next page-numbers">
+                        <i class="flaticon-chevron"></i>
+                    </a>
+                @else
+                    <span class="next page-numbers disabled">
+                        <i class="flaticon-chevron"></i>
+                    </span>
+                @endif
+            </div>
+        </div>
+
     </div>
 </div>
 <!-- Events Area End -->

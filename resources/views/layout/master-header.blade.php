@@ -53,7 +53,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('masukan') ? 'active' : '' }}" href="/masukan" >
+        <a class="nav-link {{ Request::is('masukan') ? 'active' : '' }}" href="/daftar-masukan" >
           <i class="fas fa-fw fa-table"></i>
           <span>Saran Dan Masukan</span>
         </a>

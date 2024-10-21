@@ -119,7 +119,7 @@
                                                             @method('PUT')
                                                             <div class="form-group">
                                                                 <label for="jenis_buku">Jenis Buku</label>
-                                                                <input type="text" class="form-control" id="jenis_buku" name="jenis_buku" value="" required>
+                                                                <input type="text" class="form-control" id="jenis_buku" name="jenis_buku" value="{{$jenis->jenis_buku}}" required>
                                                             </div>
                                                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                                         </form>
