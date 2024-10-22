@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JenisBukuController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -49,10 +50,10 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
         Route::get('/tambah-buku-digital', [DigitalBookController::class, 'tambah_buku_digital']);
         Route::get('/daftar-buku-dibaca', [DigitalBookController::class, 'daftar_buku_dibaca']);
 
-        Route::get('/daftar-jenis-buku', [DigitalBookController::class, 'daftar_jenis_buku']);
-        Route::post('/tambah-jenis-buku', [DigitalBookController::class, 'tambah_jenis_buku']);
-        Route::put('/jenis-buku/{id}', [DigitalBookController::class, 'edit_jenis_buku'])->name('jenis.edit');
-        Route::delete('/jenis-buku/{id}', [DigitalBookController::class, 'hapus_jenis_buku'])->name('jenis.hapus');
+        Route::get('/daftar-jenis-buku', [JenisBukuController::class, 'daftar_jenis_buku']);
+        Route::post('/tambah-jenis-buku', [JenisBukuController::class, 'tambah_jenis_buku']);
+        Route::put('/jenis-buku/{id}', [JenisBukuController::class, 'edit_jenis_buku'])->name('jenis.edit');
+        Route::delete('/jenis-buku/{id}', [JenisBukuController::class, 'hapus_jenis_buku'])->name('jenis.hapus');
         Route::get('/daftar-buku-terfavorit', [DigitalBookController::class, 'daftar_buku_terfavorit']);
         Route::post('/tambah-buku-digital-store', [DigitalBookController::class, 'store']);
         Route::put('/buku-digital/{id}', [DigitalBookController::class, 'update'])->name('buku.update');
@@ -60,7 +61,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
     //User
         Route::get('/buku-digital', [DigitalBookController::class, 'index']);
-        Route::get('/buku-digital-detail{id}', [DigitalBookController::class, 'detail'])->name('buku.digital.detail');
+        Route::get('/buku-digital-detail/{id}', [DigitalBookController::class, 'detail'])->name('buku.digital.detail');
+        Route::get('/baca-buku/{id}', [DigitalBookController::class, 'bacaBuku'])->name('buku.baca');
+
 
 //Offline Book
     //Admin

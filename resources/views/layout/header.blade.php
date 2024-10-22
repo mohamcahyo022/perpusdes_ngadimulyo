@@ -5,7 +5,7 @@
                    <div class="mobile-responsive-menu">
                         <div class="logo">
                             <a href="/">
-                                <img src="assets/images/logos/LAST.png" class="logo-one" alt="logo">
+                                <img src="{{ asset('assets/images/logos/LAST.png') }}                                " class="logo-one" alt="logo">
                             </a>
                         </div>
                     </div>
@@ -17,7 +17,7 @@
                 <div class="container-fluid">
                     <nav class="navbar navbar-expand-md navbar-light ">
                         <a class="navbar-brand" href="/">
-                            <img src="assets/images/logos/LAST.png" class="logo-one" alt="Logo">
+                            <img src="{{ asset('assets/images/logos/LAST.png') }}" class="logo-one" alt="Logo">
                         </a>
                         <div class="nav-widget-form">
                             <form class="search-form">

@@ -140,16 +140,20 @@
                                                                 <input type="number" class="form-control" id="tahun_terbit" name="tahun_terbit" value="{{ $buku->tahun_terbit }}" required>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label for="sinopsis_buku">Sinopsis Buku</label>
+                                                                <textarea class="form-control" id="sinopsis_buku" name="sinopsis_buku" rows="5" required>{{ $buku->sinopsis }}</textarea>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label for="file_buku">File Buku</label>
                                                                 <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input" id="file_buku" name="file_buku" aria-describedby="inputGroupFileAddon01">
+                                                                    <input type="file" class="custom-file-input" id="file_buku" name="file_buku"  accept="application/pdf" aria-describedby="inputGroupFileAddon01">
                                                                     <label class="custom-file-label" for="file_buku">Choose file</label>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="cover_buku">Cover Buku</label>
                                                                 <div class="custom-file">
-                                                                    <input type="file" class="custom-file-input" id="cover_buku" name="cover_buku" aria-describedby="inputGroupFileAddon01">
+                                                                    <input type="file" class="custom-file-input" id="cover_buku" name="cover_buku"  accept="image/*" aria-describedby="inputGroupFileAddon01">
                                                                     <label class="custom-file-label" for="cover_buku">Choose file</label>
                                                                 </div>
                                                             </div>

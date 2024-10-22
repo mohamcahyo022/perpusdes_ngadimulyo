@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('penulis'); // kolom penulis
             $table->string('penerbit'); // kolom penerbit
             $table->year('tahun_terbit'); // kolom tahun terbit
+            $table->text('sinopsis'); // kolom sinopsis
             $table->string('file_buku'); // kolom file buku
             $table->string('cover_buku'); // kolom file buku
             $table->integer('jumlah_dibaca')->default(0)->nullable(); // kolom jumlah dibaca

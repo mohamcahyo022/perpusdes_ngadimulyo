@@ -9,7 +9,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $bukus = Buku_Digital::all();
+        $bukus = Buku_Digital::orderBy('buku_favorit', 'desc') // Mengurutkan berdasarkan favorit secara menurun
+                          ->orderBy('jumlah_dibaca', 'desc') // Mengurutkan berdasarkan jumlah dibaca secara menurun
+                          ->get();
         return view('layout.home', compact('bukus'));
     }
 

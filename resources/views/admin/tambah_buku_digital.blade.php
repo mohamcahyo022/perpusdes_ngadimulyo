@@ -75,6 +75,10 @@
                                         <input type="text" class="form-control" name="tahun_terbit" placeholder="Masukkan Tahun Terbit">
                                     </div>
                                     <div class="form-group">
+                                        <label for="sinopsis_buku">Sinopsis Buku</label>
+                                        <textarea class="form-control" name="sinopsis_buku" rows="5" placeholder="Masukkan Sinopsis Buku"></textarea>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="file_buku">Masukan File Buku</label>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="file_buku" name="file_buku" accept="application/pdf">

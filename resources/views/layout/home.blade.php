@@ -207,7 +207,7 @@
                 </div>
                 <div class="row">
 
-                    @foreach ($bukus as $buku)
+                    @forelse ($bukus as $buku)
                     <div class="col-lg-4 col-md-6">
                         <div class="courses-item">
                             <a href="{{ route('buku.digital.detail', $buku->id) }}">
@@ -217,13 +217,15 @@
                                 <a href="courses.html" class="tag-btn">{{ $buku->jenis_buku }}</a>
                                 <h3><a href="{{ route('buku.digital.detail', $buku->id) }}">{{ $buku->judul_buku }}</a></h3>
                                 <ul class="course-list">
-                                    <li><i class="ri-group-line"></i> 4 Orang</li>
-                                    <li><i class="ri-star-fill"></i> 67 favorit</li>
+                                    <li><i class="ri-group-line"></i>{{ $buku->jumlah_dibaca }} kali</li>
+                                    <li><i class="ri-star-fill"></i>{{ $buku->buku_favorit }}</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <p class="text-center">Buku tidak ditemukan.</p>
+                    @endforelse
                 </div>
             </div>
         </div>

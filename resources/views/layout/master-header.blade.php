@@ -46,13 +46,13 @@
           </div>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('daftar-jenis-buku') ? 'active' : '' }}" href="/daftar-jenis-buku" >
+      <li class="nav-item {{ Request::is('daftar-jenis-buku') ? 'active' : '' }}">
+        <a class="nav-link" href="/daftar-jenis-buku" >
           <i class="fas fa-fw fa-table"></i>
           <span>Daftar Jenis Buku</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item {{ Request::is('daftar-masukan') ? 'active' : '' }}">
         <a class="nav-link {{ Request::is('masukan') ? 'active' : '' }}" href="/daftar-masukan" >
           <i class="fas fa-fw fa-table"></i>
           <span>Saran Dan Masukan</span>

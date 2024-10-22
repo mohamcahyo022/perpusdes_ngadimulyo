@@ -10,14 +10,28 @@ use Illuminate\Support\Facades\Storage;
 
 class DigitalBookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bukus = Buku_Digital::all();
-        return view('feature.buku.buku-digital', compact('bukus'));
+        // Ambil opsi sort dari request
+        $sort = $request->input('sort');
+
+        // Query untuk mengambil data buku dengan urutan berdasarkan pilihan
+        if ($sort == '1') {
+            // Paling Banyak Dibaca
+            $bukus = Buku_Digital::orderBy('jumlah_dibaca', 'desc')->paginate(9);
+        } elseif ($sort == '2') {
+            // Baru Ditambahkan
+            $bukus = Buku_Digital::orderBy('created_at', 'desc')->paginate(9);
+        } else {
+            // Default (semua buku tanpa urutan tertentu)
+            $bukus = Buku_Digital::paginate(9);
+        }
+        $jumlahBuku = Buku_Digital::count();
+        return view('feature.buku.buku-digital', compact('bukus','jumlahBuku'));
     }
     public function detail($id)
     {
-        $buku = Buku_Digital::find($id);
+        $buku = Buku_Digital::findOrFail($id);
         return view('feature.buku.buku-detail', compact('buku'));
     }
 
@@ -45,13 +59,6 @@ class DigitalBookController extends Controller
         return view('admin.daftar_buku_terfavorit');
     }
 
-    public function daftar_jenis_buku()
-    {
-        $bukus = Jenis_Buku::all();
-        return view('admin.daftar_jenis_buku', compact('bukus'));
-    }
-
-
     public function store(Request $request)
     {
         // Validasi input
@@ -78,13 +85,14 @@ class DigitalBookController extends Controller
         $buku->penulis = $request->input('penulis_buku');
         $buku->penerbit = $request->input('penerbit');
         $buku->tahun_terbit = $request->input('tahun_terbit');
+        $buku->sinopsis = $request->input('sinopsis_buku');
         $buku->file_buku = $fileBukuPath;
         $buku->cover_buku = $coverBukuPath;
 
         // Simpan data ke database
         $buku->save();
 
-        return redirect()->back()->with('success', 'Data buku berhasil disimpan!');
+        return redirect()->to('/daftar-buku-digital')->with('success', 'Data buku berhasil disimpan!');
     }
 
     public function update(Request $request, $id)
@@ -96,6 +104,7 @@ class DigitalBookController extends Controller
             'penulis_buku' => 'required',
             'penerbit' => 'required',
             'tahun_terbit' => 'required|numeric|digits:4',
+            'sinopsis_buku' => 'required',
             'file_buku' => 'nullable|file|mimes:pdf',
             'cover_buku' => 'nullable|file|mimes:jpeg,png,jpg',
         ]);
@@ -107,6 +116,7 @@ class DigitalBookController extends Controller
         $buku->penulis = $request->input('penulis_buku');
         $buku->penerbit = $request->input('penerbit');
         $buku->tahun_terbit = $request->input('tahun_terbit');
+        $buku->sinopsis = $request->input('sinopsis_buku');
 
         // Update file buku jika ada yang baru
         if ($request->hasFile('file_buku')) {
@@ -142,40 +152,16 @@ class DigitalBookController extends Controller
 
         return redirect()->back()->with('success', 'Data buku berhasil dihapus!');
     }
-    public function tambah_jenis_buku(Request $request)
-    {
-        $request->validate([
-            'jenis_buku' => 'required'
-        ]);
-        $buku = new Jenis_Buku();
-        $buku->jenis_buku = $request->input('jenis_buku');
 
-        // Simpan data ke database
-        $buku->save();
+    public function bacaBuku($id)
+{
+    // Temukan buku berdasarkan ID
+    $buku = Buku_Digital::findOrFail($id);
 
-        return redirect()->back()->with('success', 'Data jenis buku berhasil disimpan!');
-    }
+    // Tambahkan 1 ke jumlah dibaca
+    $buku->increment('jumlah_dibaca');
 
-    public function edit_jenis_buku(Request $request, $id)
-    {
-        // Temukan buku berdasarkan ID dan hapus
-        $request->validate([
-            'jenis_buku' => 'required'
-        ]);
-        $buku = Jenis_Buku::findOrFail($id);
-        $buku->jenis_buku = $request->input('jenis_buku');
-
-        // Simpan data ke database
-        $buku->save();
-
-        return redirect()->back()->with('success', 'Data buku berhasil dihapus!');
-    }
-    public function hapus_jenis_buku($id)
-    {
-        // Temukan buku berdasarkan ID dan hapus
-        $buku = Jenis_Buku::findOrFail($id);
-        $buku->delete();
-
-        return redirect()->back()->with('success', 'Data buku berhasil dihapus!');
-    }
+    // Kembalikan response yang mengandung URL file buku
+    return response()->json(['file_url' => asset('storage/' . $buku->file_buku)]);
+}
 }
