@@ -6167,17 +6167,17 @@ Preloader CSS
 /* Gaya untuk modal */
 .pdf-modal {
     display: none; /* Pastikan modal tersembunyi secara default */
-    position: fixed;
+    position: fixed; /* Menggunakan fixed agar tetap berada di posisi sama */
     z-index: 999; /* Di atas konten lainnya */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Latar belakang lebih gelap dan transparan */
+    background-color: rgba(0, 0, 0, 0.85); /* Latar belakang transparan */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0; /* Sembunyikan secara visual dengan opacity */
+    align-items: center; /* Untuk menempatkan isi di tengah */
+    justify-content: center; /* Untuk menempatkan isi di tengah */
+    opacity: 0; /* Sembunyikan secara visual */
     transition: opacity 0.3s ease-in-out; /* Animasi smooth saat muncul */
 }
 

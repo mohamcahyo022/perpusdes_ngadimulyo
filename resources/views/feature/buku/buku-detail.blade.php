@@ -49,15 +49,15 @@
                             <div class="content">
                                 <span>Detail Buku :</span>
                                 <ul class="courses-details-list">
-                                    <li>Penulis : {{ $buku->penulis }}</li>
-                                    <li>Penerbit : {{ $buku->penerbit }}</li>
+                                    <li>Penulis      : {{ $buku->penulis }}</li>
+                                    <li>Penerbit     : {{ $buku->penerbit }}</li>
                                     <li>Tahun Terbit : {{ $buku->tahun_terbit }}</li>
-                                    <li>Jenis Buku : {{ $buku->jenis_buku }}</li>
+                                    <li>Jenis Buku   : {{ $buku->jenis_buku }}</li>
                                 </ul>
                                 <a href="#" class="default-btn" data-id="{{ $buku->id }}" onclick="bacaBuku({{ $buku->id }})">Baca Buku</a>
 
                                 <!-- Modal untuk menampilkan PDF -->
-                                <div id="pdf-modal" class="pdf-modal" style="display: none;"> <!-- Hide modal by default -->
+                                <div id="pdf-modal" class="pdf-modal" style="display: none;">
                                     <div class="pdf-modal-content">
                                         <span class="pdf-close" onclick="closeModal()">&times;</span>
                                         <iframe id="pdf-frame" src="" width="100%" height="100%" style="border:none;"></iframe>

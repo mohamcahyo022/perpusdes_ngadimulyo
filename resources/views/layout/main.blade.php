@@ -40,8 +40,20 @@
 
         <!-- Jquery Min JS -->
         <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
         <!-- Plugins JS -->
-        <script src="{{ asset('assets/js/plugins.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/meanmenu.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/ajaxchimp.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/form-validator.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/contact-form-script.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/owl.carousel.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/magnific-popup.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/aos.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/odometer.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/appear.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('assets/js/tweenMax.min.js') }}" type="text/javascript"></script>
+
         <!-- Custom  JS -->
         <script src="{{ asset('assets/js/custom.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
