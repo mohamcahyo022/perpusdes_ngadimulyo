@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="{{ asset('assets/css/theme-dark.css') }}">
         <!-- Animate CSS (external) -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
 
 
         <!-- Title -->
@@ -37,11 +39,11 @@
         @include('layout.footer')
 
         <!-- Jquery Min JS -->
-        <script src="assets/js/jquery.min.js"></script>
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
         <!-- Plugins JS -->
-        <script src="assets/js/plugins.js"></script>
+        <script src="{{ asset('assets/js/plugins.js') }}"></script>
         <!-- Custom  JS -->
-        <script src="assets/js/custom.js"></script>
+        <script src="{{ asset('assets/js/custom.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         @if(session('success'))
