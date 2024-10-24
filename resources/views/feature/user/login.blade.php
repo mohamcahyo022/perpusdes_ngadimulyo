@@ -39,27 +39,34 @@
                         <div class="user-all-form">
                             <div class="contact-form">
                                 <h3 class="user-title"> Sign in</h3>
-                                <form id="contactForm">
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-lg-12 ">
                                             <div class="form-group">
-                                                <input type="text" name="name" id="name" class="form-control" required data-error="Username Or Email Address*" placeholder="Username Or Email Address*">
+                                                <input type="text" name="email" id="email" class="form-control" required data-error="Email Address*" placeholder="Email Address">
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <input class="form-control" type="password" name="Password" placeholder="Password*">
+                                                <input class="form-control" type="password" name="password" id="passowrd" placeholder="Password">
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-12 form-condition">
+                                        <div class="col-lg-6 form-condition">
                                             <div class="agree-label">
-                                                <input type="checkbox" id="chb1">
-                                                <label for="chb1">
-                                                    Remember Me <a class="forget" href="forgot-password.html">Forgot Password?</a>
-                                                </label>
+                                                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                                                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                                             </div>
+                                        </div>
+
+                                        <div class="col-lg-6 form-condition">
+                                            @if (Route::has('password.request'))
+                                                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                                                    {{ __('Forgot your password?') }}
+                                                </a>
+                                            @endif
                                         </div>
 
                                         <div class="col-lg-12 col-md-12">

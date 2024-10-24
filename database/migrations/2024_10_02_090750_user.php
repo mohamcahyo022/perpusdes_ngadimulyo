@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nama_lengkap'); // kolom nama lengkap
             $table->string('email')->unique(); // kolom email
             $table->string('nomor_wa')->nullable(); // kolom nomor WA, boleh kosong
-            $table->enum('jenis_kelamin', ['L', 'P'])->nullable(); // kolom jenis kelamin, boleh kosong
             $table->string('password'); // kolom password
             $table->string('role')->default('user'); // kolom role, default ke 'user'
             $table->timestamps(); // kolom untuk created_at dan updated_at

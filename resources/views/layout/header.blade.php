@@ -76,9 +76,50 @@
 
                             <div class="others-options d-flex align-items-center">
                                 <div class="optional-item">
-                                    <a href="{{ route('register') }}" class="default-btn two">Daftar</a>
+                                    @if (auth()->check())
+                                    <div class="dropdown">
+                                        <span class="greeting" id="userDropdown" onclick="toggleDropdown()">Halo, {{ auth()->user()->nama_lengkap }}</span>
+                                        <div id="dropdownMenu" class="dropdown-menu" style="display: none;">
+                                            <a href="{{ route('profile.edit') }}" class="dropdown-item">Profil</a>
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <x-responsive-nav-link :href="route('logout')"
+                                                                       onclick="event.preventDefault(); this.closest('form').submit();">
+                                                    {{ __('Log Out') }}
+                                                </x-responsive-nav-link>
+                                            </form>
+                                            <form id="logout-form" action="" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </div>
+                                    </div>
+                                    @else
+                                        <a href="{{ route('register') }}" class="default-btn two">Daftar</a>
+                                    @endif
                                 </div>
                             </div>
+
+                            <script>
+                                function toggleDropdown() {
+                                    const dropdownMenu = document.getElementById('dropdownMenu');
+                                    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+                                }
+
+                                // Menutup dropdown jika pengguna mengklik di luar dropdown
+                                window.onclick = function(event) {
+                                    if (!event.target.matches('.greeting')) {
+                                        const dropdowns = document.getElementsByClassName("dropdown-menu");
+                                        for (let i = 0; i < dropdowns.length; i++) {
+                                            const openDropdown = dropdowns[i];
+                                            if (openDropdown.style.display === 'block') {
+                                                openDropdown.style.display = 'none';
+                                            }
+                                        }
+                                    }
+                                }
+                                </script>
+
+
                         </div>
                     </nav>
                 </div>

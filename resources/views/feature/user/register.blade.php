@@ -33,23 +33,36 @@
                         <div class="user-all-form">
                             <div class="contact-form">
                                 <h3 class="user-title"> Sign up </h3>
-                                <form id="contactForm">
+                                <form method="POST" action="{{ route('register') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class= "col-lg-12">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" required data-error="Username" placeholder="Username">
+                                                <input type="text" name="username" id="name" class="form-control" required data-error="Username" placeholder="Username">
+                                            </div>
+                                        </div>
+
+                                        <div class= "col-lg-12">
+                                            <div class="form-group">
+                                                <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control" required data-error="Nama Lengkap" placeholder="Nama Lengkap">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-12 ">
                                             <div class="form-group">
-                                                <input type="email" class="form-control" required data-error="Please enter Email" placeholder="Please Enter Email">
+                                                <input type="email" name="email" id="email" class="form-control" required data-error="Please enter Email" placeholder="Please Enter Email">
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <input class="form-control" type="password" name="password" placeholder="Password">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <input class="form-control" type="password" name="password_confirmation" placeholder="Confirm Password">
                                             </div>
                                         </div>
 
