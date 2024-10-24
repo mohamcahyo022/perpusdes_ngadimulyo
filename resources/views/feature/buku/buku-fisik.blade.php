@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Inner Banner -->
-<div class="inner-banner inner-banner-bg">
+<div class="inner-banner inner-banner-bg3">
     <div class="container">
         <div class="inner-title text-center">
             <h3>Buku Fisik</h3>

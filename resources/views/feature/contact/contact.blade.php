@@ -2,7 +2,7 @@
 @section('title', 'Kontak | Perpustakaan Desa')
 @section('content')
         <!-- Inner Banner -->
-        <div class="inner-banner inner-banner-bg">
+        <div class="inner-banner inner-banner-bg4">
             <div class="container">
                 <div class="inner-title text-center">
                     <h3>Contact us</h3>
