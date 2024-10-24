@@ -495,6 +495,18 @@ Navbar Area
   margin-left: 15px;
   margin-right: 15px;
 }
+.greeting {
+  font-size: 17px;
+  color: blue;
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-right: 15px;
+}
 .desktop-nav .navbar .navbar-nav .nav-item a:hover, .desktop-nav .navbar .navbar-nav .nav-item a:focus, .desktop-nav .navbar .navbar-nav .nav-item a.active {
   color: var(--mainColor);
 }
