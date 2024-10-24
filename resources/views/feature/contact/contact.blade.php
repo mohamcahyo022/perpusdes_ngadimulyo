@@ -8,9 +8,9 @@
                     <h3>Contact us</h3>
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="{{ route('home') }}">Home</a>
                         </li>
-                        <li>Contact us</li>
+                        <li>Hubungi Kami</li>
                     </ul>
                 </div>
             </div>
@@ -24,9 +24,9 @@
                     <div class="col-lg-4  col-12 col-sm-8">
                         <div class="contact-info-card">
                             <i class="ri-map-pin-fill"></i>
-                            <h3>Our location </h3>
-                            <p>Ca 560 Bush St & 20th Ave, Apt 5</p>
-                            <p>San Francisco,230909, Canada</p>
+                            <h3>Lokasi Kami </h3>
+                            <p>RT.10/02 Ngadimulyo, Kampak-Trenggalek Jawa Timur, Bulurejo, Ngadimulyo, Kec. Kampak, Kabupaten Trenggalek, Jawa Timur 66373</p>
+                            {{-- <p>San Francisco,230909, Canada</p> --}}
                         </div>
                     </div>
 

@@ -9,7 +9,7 @@
                         <div class="banner-content">
                             <span data-aos="fade-up" data-aos-delay="900" data-aos-duration="1000" data-aos-once="true">FOR A BETTER FUTURE</span>
                             <h1 data-aos="fade-down" data-aos-delay="900" data-aos-duration="1000" data-aos-once="true">
-                                Selamat Datang di Perpustakaan Desa Cahaya Dunia!
+                                Selamat Datang di Perpustakaan Desa "Cahaya Dunia"
                             </h1>
                             <p data-aos="fade-up" data-aos-delay="900" data-aos-duration="1000" data-aos-once="true">
                                 Jangan lewatkan kesempatan untuk menjelajahi karya-karya menarik yang
@@ -35,8 +35,8 @@
                             <div class="top-content" data-aos="fade-up" data-aos-delay="900" data-aos-duration="1000" data-aos-once="true">
                                 <i class="flaticon-student"></i>
                                 <div class="content">
-                                    <h3>250K</h3>
-                                    <p>Assisted student</p>
+                                    <h3>Jelajahi Bukumu Sekarang</h3>
+                                    <p>Memiliki {{ $totalBuku }} Total Buku</p>
                                 </div>
                             </div>
                             <div class="right-content" data-aos="fade-down" data-aos-delay="900" data-aos-duration="1000" data-aos-once="true">
@@ -49,11 +49,11 @@
 
                             <div class="left-content" data-aos="fade-up" data-aos-delay="900" data-aos-duration="1000" data-aos-once="true">
                                 <div class="content">
-                                    <img src="assets/images/home-one/user-img.jpg" alt="User" />
-                                    <h3>User experience class</h3>
-                                    <p>Today at 12.00 PM</p>
+                                    <img src="{{ asset('assets/images/home-one/book.png') }}" alt="User" />
+                                    <h3>Ayo Gabung Sekarang</h3>
+                                    <p>Dan Temukan Buku Favoritmu</p>
                                 </div>
-                                <a href="/register" class="join-btn">Join now</a>
+                                <a href="{{ route('register') }}" class="join-btn">Gabung Sekarang</a>
                             </div>
                             <div class="banner-img-shape" >
                                 <div class="shape1" data-aos="fade-up" data-aos-delay="900" data-aos-duration="1000" data-aos-once="true">
@@ -82,29 +82,29 @@
                     <div class="col-lg-3 col-6 col-md-3">
                         <div class="counter-content">
                             <i class="flaticon-online-course"></i>
-                            <h3><span class="odometer" data-count="15000">00000</span>+</h3>
-                            <p>Courses & videos</p>
+                            <h3><span class="odometer" data-count="{{ $jumlahDigital }}">00000</span></h3>
+                            <p>Buku Digital</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6 col-md-3">
                         <div class="counter-content">
                             <i class="flaticon-student"></i>
-                            <h3><span class="odometer" data-count="145000">000000</span>+</h3>
-                            <p>Students enrolled</p>
+                            <h3><span class="odometer" data-count="{{ $jumlahFisik }}">000000</span></h3>
+                            <p>Buku Fisik</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6 col-md-3">
                         <div class="counter-content">
                             <i class="flaticon-online-course-1"></i>
-                            <h3><span class="odometer" data-count="10000">00000</span>+</h3>
-                            <p>Courses instructors</p>
+                            <h3><span class="odometer" data-count="10000">00000</span></h3>
+                            <p>User yang Terdaftar</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6 col-md-3">
                         <div class="counter-content">
                             <i class="flaticon-customer-satisfaction"></i>
-                            <h3><span class="odometer" data-count="100">000</span>%</h3>
-                            <p>Satisfaction rate</p>
+                            <h3><span class="odometer" data-count="{{ $jumlahJenis }}">000</span></h3>
+                            <p>Kategori Buku yang Tersedia</p>
                         </div>
                     </div>
                 </div>
@@ -123,75 +123,21 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-3 text-end">
-                        <a href="courses.html" class="default-btn">Explore more</a>
+                        <a href="{{ route('buku.digital') }}" class="default-btn">Explore more</a>
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-3 col-6 col-md-4">
-                        <div class="featured-card">
-                            <a href="courses.html">
-                                <i class="flaticon-web-development"></i>
-                                <h3>Development</h3>
-                            </a>
+                    @foreach ($jenis_bukus as $item)
+                        <div class="col-lg-3 col-6 col-md-4">
+                            <div class="featured-card">
+                                <a href="{{ route('buku.digital.jenis', $item->id) }}"> <!-- Ganti dengan route yang sesuai -->
+                                    <h3>{{ $item->jenis_buku }}</h3> <!-- Menampilkan jenis buku -->
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-6 col-md-4">
-                        <div class="featured-card">
-                            <a href="courses.html">
-                                <i class="flaticon-design"></i>
-                                <h3>Web designing</h3>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6 col-md-4">
-                        <div class="featured-card">
-                            <a href="courses.html">
-                                <i class="flaticon-wellness"></i>
-                                <h3>Lifestyle</h3>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6 col-md-4">
-                        <div class="featured-card">
-                            <a href="courses.html">
-                                <i class="flaticon-heart-beat"></i>
-                                <h3>Health & fitness</h3>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6 col-md-4">
-                        <div class="featured-card">
-                            <a href="courses.html">
-                                <i class="flaticon-corporate"></i>
-                                <h3>Gov. exams</h3>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6 col-md-4">
-                        <div class="featured-card">
-                            <a href="courses.html">
-                                <i class="flaticon-camera"></i>
-                                <h3>Photography</h3>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6 col-md-4">
-                        <div class="featured-card">
-                            <a href="courses.html">
-                                <i class="flaticon-user"></i>
-                                <h3>Accounting</h3>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6 col-md-4">
-                        <div class="featured-card">
-                            <a href="courses.html">
-                                <i class="flaticon-folder"></i>
-                                <h3>Data science</h3>
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
+
             </div>
         </div>
         <!-- Featured Area End -->
@@ -214,7 +160,7 @@
                                 <img src="{{ asset('storage/' . $buku->cover_buku) }}" alt="Courses"/>
                             </a>
                             <div class="content">
-                                <a href="courses.html" class="tag-btn">{{ $buku->jenis_buku }}</a>
+                                <a href="{{ route('buku.digital.jenis', $item->id) }}" class="tag-btn">{{ $buku->jenis_buku }}</a>
                                 <h3><a href="{{ route('buku.digital.detail', $buku->id) }}">{{ $buku->judul_buku }}</a></h3>
                                 <ul class="course-list">
                                     <li><i class="ri-group-line"></i>{{ $buku->jumlah_dibaca }} kali</li>

@@ -54,7 +54,7 @@
                                         </div>
 
                                         <div class="col-lg-12 col-md-12">
-                                            <a href="index.html" type="submit" class="default-btn btn-danger text-decoration-none">
+                                            <a href="{{ route('home') }}" type="submit" class="default-btn btn-danger text-decoration-none">
                                                 Kembali
                                             </a>
                                             <button type="submit" class="default-btn">
@@ -62,7 +62,7 @@
                                             </button>
                                         </div>
                                         <div class="mt-4">
-                                            <span>Jika anda sudah memiliki akun <a href="signin.html">Login</a></span>
+                                            <span>Jika anda sudah memiliki akun <a href="{{ route('login') }}">Login</a></span>
                                         </div>
                                     </div>
                                 </form>
@@ -72,7 +72,8 @@
 
                     <div class="col-lg-6">
                         <div class="user-img">
-                            <img src="assets/images/faq-img.jpg" alt="faq" />
+                            <img src="{{ asset('assets/images/logos/register.jpg') }}" alt="faq" />
+                            {{-- <img src="assets/images/faq-img.jpg" alt="faq" /> --}}
                         </div>
                     </div>
                 </div>

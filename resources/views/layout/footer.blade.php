@@ -40,17 +40,17 @@
                             <h3>Tentang Kami</h3>
                             <ul class="footer-list">
                                 <li>
-                                    <a href="instructors.html">
+                                    <a href="{{ route('about') }}">
                                         Pengenalan
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="about.html">
+                                    <a href="{{ route('about') }}">
                                         Visi kami
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="signup.html">
+                                    <a href="{{ route('about') }}">
                                         Misi Kami
                                     </a>
                                 </li>
@@ -62,12 +62,12 @@
                             <h3>Fitur yang Tersedia</h3>
                             <ul class="footer-list">
                                 <li>
-                                    <a href="index.html">
+                                    <a href="{{ route('buku.digital') }}">
                                         Buku Digital
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="courses.html" >
+                                    <a href="{{ route('buku.fisik') }}" >
                                         Buku Fisik
                                     </a>
                                 </li>

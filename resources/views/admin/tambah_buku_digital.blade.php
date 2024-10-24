@@ -57,6 +57,7 @@
                                     <div class="form-group">
                                         <label for="jenis_buku">Jenis Buku</label>
                                         <select class="form-control" id="jenis_buku" name="jenis_buku" required>
+                                                <option selected disabled>Pilih Jenis Buku</option>
                                             @foreach ($bukus as $jenis)
                                                 <option value="{{ $jenis->jenis_buku }}">{{ $jenis->jenis_buku }}</option>
                                             @endforeach

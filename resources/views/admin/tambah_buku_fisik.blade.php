@@ -58,6 +58,7 @@
                                 <div class="form-group">
                                     <label for="jenis_buku">Jenis Buku</label>
                                     <select class="form-control" name="jenis_buku">
+                                            <option selected disabled>Pilih Jenis Buku</option>
                                         @foreach ($jenisBuku as $jenis)
                                             <option value="{{ $jenis->jenis_buku }}">{{ $jenis->jenis_buku }}</option>
                                         @endforeach
@@ -83,8 +84,8 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select class="form-control" name="status">
-                                        <option value="tersedia">Tersedia</option>
-                                        <option value="tidak tersedia">Tidak Tersedia</option>
+                                        <option value="Tersedia">Tersedia</option>
+                                        <option value="Tidak Tersedia">Tidak Tersedia</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\JenisBukuController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -25,8 +26,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 //Login dan Register
     //Admin
     //User
-        Route::get('/login', [LoginController::class, 'index']);
-        Route::get('/register', [RegisterController::class, 'index']);
+        Route::get('/login', [LoginController::class, 'index'])->name('login');
+        Route::get('/register', [RegisterController::class, 'index'])->name('register');
 
 //Dashboard
     //Admin
@@ -40,9 +41,11 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
     //User
-        Route::get('/', [HomeController::class, 'index']);
-        Route::get('/about', [HomeController::class, 'about']);
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/about', [HomeController::class, 'about'])->name('about');
         Route::get('/contact', [ContactUsController::class, 'contact']);
+        Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
+
 
 //Digital Book
     //Admin
@@ -60,8 +63,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
         Route::delete('/buku-digital/{id}', [DigitalBookController::class, 'destroy'])->name('buku.hapus');
 
     //User
-        Route::get('/buku-digital', [DigitalBookController::class, 'index']);
+        Route::get('/buku-digital', [DigitalBookController::class, 'index'])->name('buku.digital');
         Route::get('/buku-digital-detail/{id}', [DigitalBookController::class, 'detail'])->name('buku.digital.detail');
+        Route::get('/buku-digital-jenis/{id}', [DigitalBookController::class, 'filterByJenis'])->name('buku.digital.jenis');
         Route::get('/baca-buku/{id}', [DigitalBookController::class, 'bacaBuku'])->name('buku.baca');
 
 

@@ -9,7 +9,7 @@
             <h3>Buku Fisik</h3>
             <ul>
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="{{ route('home') }}">Home</a>
                 </li>
                 <li>Buku Fisik</li>
             </ul>
@@ -57,7 +57,7 @@
                                 </a>
                             </div>
                             <div class="event-content">
-                                <h3><a href="event-details.html">{{$book->judul_buku}}</a></h3>
+                                <h3><a>{{$book->judul_buku}}</a></h3>
                                 <p><i class="ri-file-list-line text-info"></i> Jenis Buku: <small class="text-primary">{{$book->jenis_buku}}</small></p>
                                 <p><i class="ri-user-line text-info"></i> Penulis: <small class="text-primary">{{$book->penulis}}</small></p>
                                 <p><i class="ri-git-repository-commits-line text-info"></i> Penerbit: <small class="text-primary">{{$book->penerbit}}</small></p>
@@ -66,7 +66,7 @@
                                 <p>
                                     <i class="ri-git-repository-line text-info"></i>
                                     Status Buku:
-                                    @if($book->status == 'tersedia')
+                                    @if($book->status == 'Tersedia'||'tersedia')
                                         <span class="badge bg-success">{{ $book->status }}</span>
                                     @else
                                         <span class="badge bg-danger">{{ $book->status }}</span>

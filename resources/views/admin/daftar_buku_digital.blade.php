@@ -125,7 +125,12 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="jenis_buku">Jenis Buku</label>
-                                                                <input type="text" class="form-control" id="jenis_buku" name="jenis_buku" value="{{ $buku->jenis_buku }}" required>
+                                                                <select class="form-control" id="jenis_buku" name="jenis_buku" required>
+                                                                    <option selected disabled>Pilih Jenis Buku</option>
+                                                                @foreach ($jenis as $j)
+                                                                    <option value="{{ $j->jenis_buku }}">{{ $j->jenis_buku }}</option>
+                                                                @endforeach
+                                                            </select>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="penulis_buku">Penulis Buku</label>

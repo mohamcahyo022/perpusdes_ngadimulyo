@@ -94,7 +94,7 @@
                                         <td class="text-center">{{ $no++ }}</td>
                                         <td class="text-center">{{ $jenis->jenis_buku }}</td>
                                         <td class="text-center">
-                                            <a class="btn btn-warning btn-sm text-white" style="cursor: pointer;" data-toggle="modal" data-target="#editModal">Edit</a>
+                                            <a class="btn btn-warning btn-sm text-white" style="cursor: pointer;" data-toggle="modal" data-target="#editModal{{ $jenis->id }}">Edit</a>
                                             <form action="{{ route('jenis.hapus', $jenis->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
@@ -104,11 +104,11 @@
                                     </tr>
 
                                     <!-- Modal untuk Edit -->
-                                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="editModal{{ $jenis->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $jenis->id }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="editModalLabel">Edit Data Buku</h5>
+                                                        <h5 class="modal-title" id="editModalLabel{{ $jenis->id }}">Edit Data Buku</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span>&times;</span>
                                                         </button>

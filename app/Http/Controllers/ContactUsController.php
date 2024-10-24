@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku_Kontak;
+use App\Models\Jenis_Buku;
 use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
@@ -10,7 +11,8 @@ class ContactUsController extends Controller
     //
     public function contact()
     {
-        return view('feature.contact.contact');
+        $jenis_bukus = Jenis_Buku::all();
+        return view('feature.contact.contact', compact('jenis_bukus'));
     }
 
     public function store(Request $request)

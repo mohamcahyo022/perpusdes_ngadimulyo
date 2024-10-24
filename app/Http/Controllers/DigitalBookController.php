@@ -27,12 +27,14 @@ class DigitalBookController extends Controller
             $bukus = Buku_Digital::paginate(9);
         }
         $jumlahBuku = Buku_Digital::count();
-        return view('feature.buku.buku-digital', compact('bukus','jumlahBuku'));
+        $jenis_bukus = Jenis_Buku::all();
+        return view('feature.buku.buku-digital', compact('bukus','jumlahBuku', 'jenis_bukus'));
     }
     public function detail($id)
     {
         $buku = Buku_Digital::findOrFail($id);
-        return view('feature.buku.buku-detail', compact('buku'));
+        $jenis_bukus = Jenis_Buku::all();
+        return view('feature.buku.buku-detail', compact('buku', 'jenis_bukus'));
     }
 
 
@@ -40,7 +42,8 @@ class DigitalBookController extends Controller
     public function daftar_buku_digital()
     {
         $bukus = Buku_Digital::all();
-        return view('admin.daftar_buku_digital', compact('bukus'));
+        $jenis = Jenis_Buku::all();
+        return view('admin.daftar_buku_digital', compact('bukus','jenis'));
     }
 
     public function tambah_buku_digital()
@@ -154,14 +157,43 @@ class DigitalBookController extends Controller
     }
 
     public function bacaBuku($id)
-{
-    // Temukan buku berdasarkan ID
-    $buku = Buku_Digital::findOrFail($id);
+    {
+        // Temukan buku berdasarkan ID
+        $buku = Buku_Digital::findOrFail($id);
 
-    // Tambahkan 1 ke jumlah dibaca
-    $buku->increment('jumlah_dibaca');
+        // Tambahkan 1 ke jumlah dibaca
+        $buku->increment('jumlah_dibaca');
 
-    // Kembalikan response yang mengandung URL file buku
-    return response()->json(['file_url' => asset('storage/' . $buku->file_buku)]);
-}
+        // Kembalikan response yang mengandung URL file buku
+        return response()->json(['file_url' => asset('storage/' . $buku->file_buku)]);
+    }
+
+    public function filterByJenis(Request $request, $id)
+    {
+        // Ambil opsi sort dari request
+        $sort = $request->input('sort');
+
+        // Query dasar untuk mengambil data buku digital berdasarkan jenis_buku
+        $query = Buku_Digital::join('jenis__bukus', 'buku__digitals.jenis_buku', '=', 'jenis__bukus.jenis_buku')
+            ->select('buku__digitals.*') // Select all columns from buku_digital
+            ->where('jenis__bukus.id', $id); // Filter by jenis_buku id
+
+        // Tambahkan sorting berdasarkan pilihan pengguna
+        if ($sort == '1') {
+            // Paling Banyak Dibaca
+            $query->orderBy('buku__digitals.jumlah_dibaca', 'desc');
+        } elseif ($sort == '2') {
+            // Baru Ditambahkan
+            $query->orderBy('buku__digitals.created_at', 'desc');
+        }
+
+        // Paginate the filtered and sorted results
+        $bukus = $query->paginate(9);
+
+        // Hitung jumlah buku berdasarkan jenis_buku
+        $jumlahBuku = $query->count();
+        $jenis_bukus = Jenis_Buku::all();
+
+        return view('feature.buku.buku-digital', compact('bukus', 'jumlahBuku', 'jenis_bukus'));
+    }
 }

@@ -31,7 +31,8 @@
                 <div class="row align-items-center justify-content-center">
                     <div class="col-lg-6">
                         <div class="user-img">
-                            <img src="assets/images/faq-img.jpg" alt="faq" />
+                            <img src="{{ asset('assets/images/logos/login.jpeg') }}" alt="faq" />
+                            {{-- <img src="assets/images/faq-img.jpg" alt="faq" /> --}}
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -62,7 +63,7 @@
                                         </div>
 
                                         <div class="col-lg-12 col-md-12">
-                                            <a href="index.html" type="submit" class="default-btn btn-danger text-decoration-none">
+                                            <a href="{{ route('home') }}" type="submit" class="default-btn btn-danger text-decoration-none">
                                                 Kembali
                                             </a>
                                             <button type="submit" class="default-btn">
@@ -70,7 +71,7 @@
                                             </button>
                                         </div>
                                         <div class="mt-4">
-                                            <span>Jika anda belum memiliki akun <a href="signup.html">Daftar</a></span>
+                                            <span>Jika anda belum memiliki akun <a href="{{ route('register') }}">Daftar</a></span>
                                         </div>
                                     </div>
                                 </form>

@@ -12,7 +12,8 @@ class PhysicBookController extends Controller
     public function index()
     {
         $books = Buku_Fisik::paginate(10);
-        return view('feature.buku.buku-fisik', compact('books'));
+        $jenis_bukus = Jenis_Buku::all();
+        return view('feature.buku.buku-fisik', compact('books','jenis_bukus'));
     }
 
     public function detail()

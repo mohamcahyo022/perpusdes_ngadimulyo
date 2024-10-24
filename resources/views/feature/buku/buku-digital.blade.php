@@ -27,11 +27,13 @@
                         <h3>Kami Menemukan  <span> {{ $jumlahBuku }} </span>Buku Untuk Mu</h3>
                     </div>
                 </div>
-
                 <div class="col-lg-4 col-md-6">
                     <div class="product-list">
-                        <form method="GET" action="/buku-digital">
+                        @foreach ($jenis_bukus as $item)
+                        <form method="GET" action="{{ Route::currentRouteName() === 'buku.digital.jenis' ? route('buku.digital.jenis', ['id' => $item->id]) : '/buku-digital' }}">
+                        @endforeach
                             <select class="form-select" aria-label="Default select example" name="sort" onchange="this.form.submit()">
+                                <option disabled selected>Urutkan Berdasarkan</option>
                                 <option value="1" {{ request('sort') == '1' ? 'selected' : '' }}>Paling Banyak Dibaca</option>
                                 <option value="2" {{ request('sort') == '2' ? 'selected' : '' }}>Baru Ditambahkan</option>
                             </select>
@@ -63,12 +65,12 @@
             @endforelse
 
 
-            <!-- Pagination Links -->
+            {{-- <!-- Pagination Links -->
             <div class="col-lg-12 col-md-12 text-center">
                 <div class="pagination-area">
                     {{ $bukus->links() }} <!-- Menampilkan links pagination -->
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

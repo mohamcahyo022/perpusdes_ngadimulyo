@@ -5,12 +5,13 @@
         <div class="inner-banner inner-banner-bg">
             <div class="container">
                 <div class="inner-title text-center">
-                    <h3>About us</h3>
+                    <h3>Tengtang Perpustakaan</h3>
+                    <h3>Cahaya Dunia</h3>
                     <ul>
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="{{ route('home') }}">Home</a>
                         </li>
-                        <li>About Us</li>
+                        <li>Tentang Perpustakaan</li>
                     </ul>
                 </div>
             </div>

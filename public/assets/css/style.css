@@ -210,7 +210,7 @@ img {
 }
 
 .default-btn {
-  padding: 15px 35px;
+  padding: 10px 30px;
   text-align: center;
   color: var(--whiteColor);
   font-size: var(--fontSize);
@@ -225,6 +225,7 @@ img {
   box-shadow: none;
   overflow: hidden;
   white-space: nowrap;
+  border-radius: 20px;
 }
 .default-btn i {
   position: relative;
@@ -1829,13 +1830,19 @@ Featured Area
 }
 
 .featured-card {
+  display: flex;
+  align-items: center;  /* Vertikal ke tengah */
+  justify-content: center; /* Horizontal ke tengah */
+  flex-direction: column; /* Jika ingin menumpuk elemen secara vertikal */
   background-color: var(--whiteColor);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
   padding: 40px 30px;
   position: relative;
   z-index: 1;
   margin-bottom: 30px;
+  border-radius: 16px; /* Membulatkan sudut card */
 }
+
 .featured-card::before {
   content: "";
   position: absolute;
@@ -1857,7 +1864,7 @@ Featured Area
   width: 60px;
   height: 60px;
   line-height: 65px;
-  border-radius: 50%;
+  border-radius: 50%; /* Membulatkan ikon */
   text-align: center;
   font-size: 22px;
   color: var(--mainColor);
@@ -2237,23 +2244,31 @@ Courses Area
 }
 
 .courses-item {
-  margin-bottom: 30px;
-  background-color: var(--whiteColor);
-  box-shadow: rgba(0, 0, 0, 0.06) 0 0 15px;
-  transition: 0.7s;
-}
-.courses-item a {
-  display: block;
-}
-.courses-item .content {
-  padding: 30px;
-  position: relative;
-}
-.courses-item .content .course-instructors {
-  position: absolute;
-  right: 30px;
-  top: -50px;
-}
+    width: 100%; /* Pastikan lebar card menyesuaikan container */
+    margin-bottom: 30px;
+    background-color: var(--whiteColor);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 0 15px;
+    transition: 0.7s;
+    overflow: hidden; /* Potong konten yang meluap */
+  }
+
+  .courses-item a {
+    display: block;
+  }
+
+  .courses-item img {
+    width: 100%; /* Gambar menyesuaikan lebar card */
+    height: 300px; /* Tinggi tetap untuk gambar */
+    object-fit: cover; /* Memastikan gambar sesuai ukuran tanpa distorsi */
+    display: block;
+  }
+
+  .courses-item .content {
+    padding: 20px; /* Kurangi padding untuk mengatur konten */
+    position: relative;
+    height: auto; /* Membuat konten dinamis berdasarkan tinggi gambar */
+  }
+
 .courses-item .content .course-instructors img {
   border-radius: 50%;
   border: 2px solid var(--whiteColor);
@@ -2269,14 +2284,6 @@ Courses Area
 .courses-item .content .tag-btn:hover {
   background-color: var(--mainColor);
   color: var(--whiteColor);
-}
-.courses-item .content .price-text {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  color: var(--mainColor);
-  font-size: 22px;
-  font-weight: 600;
 }
 .courses-item .content h3 {
   margin-top: 17px;
