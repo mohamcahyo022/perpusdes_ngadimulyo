@@ -5,7 +5,7 @@
         <div class="inner-banner inner-banner-bg">
             <div class="container">
                 <div class="inner-title text-center">
-                    <h3>Tengtang Perpustakaan</h3>
+                    <h3>Tentang Perpustakaan</h3>
                     <h3>Cahaya Dunia</h3>
                     <ul>
                         <li>
@@ -25,40 +25,41 @@
                     <div class="col-lg-6">
                         <div class="enrolled-img-three mb-30 pr-20">
                             <img src="assets/images/enrolled/enrolled-img3.jpg" alt="Enrolled">
-                            <div class="enrolled-img-content">
+                            {{-- <div class="enrolled-img-content">
                                 <i class="flaticon-discount"></i>
                                 <div class="content">
                                     <h3>Get 40% off</h3>
                                     <p>Every course</p>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="enrolled-content mb-30">
                             <div class="section-title">
-                                <span>WHO WE ARE</span>
-                                <h2>We have the most qualified instructors in your hometown.</h2>
+                                {{-- <span>WHO WE ARE</span> --}}
+                                <h2>Perpustakaan Desa Cahaya Dunia</h2>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
+                                    Perpustakaan Desa Cahaya Dunia merupakan pusat pembelajaran dan pengembangan masyarakat di Desa Ngadimulyo. Dibangun dengan tujuan untuk memberikan akses literasi dan informasi kepada seluruh warga, perpustakaan ini menjadi tempat bertumbuhnya pengetahuan dan kreativitas.
                                 </p>
                             </div>
                             <div class="row">
+                                <h4>Visi dan Misi</h4>
                                 <div class="col-lg-6 col-6">
                                     <ul class="enrolled-list">
-                                        <li><i class="flaticon-check"></i> Full lifetime access</li>
-                                        <li><i class="flaticon-check"></i> Certificate of completion</li>
+                                        <li><i class="flaticon-check"></i> Menjadi pusat literasi di Desa Ngadimulyo.</li>
+                                        <li><i class="flaticon-check"></i> Menciptakan masyarakat yang cerdas dan kreatif.</li>
                                     </ul>
                                 </div>
 
                                 <div class="col-lg-6 col-6">
                                     <ul class="enrolled-list">
-                                        <li><i class="flaticon-check"></i> 20+ downloadable resources</li>
-                                        <li><i class="flaticon-check"></i> Free trial 7 days</li>
+                                        <li><i class="flaticon-check"></i> Meningkatkan minat baca</li>
+                                        <li><i class="flaticon-check"></i> Menyediakan akses informasi </li>
                                     </ul>
                                 </div>
                             </div>
-                            <a href="courses.html" class="default-btn border-radius-50">Enrolled today</a>
+                            {{-- <a href="courses.html" class="default-btn border-radius-50">Enrolled today</a> --}}
                         </div>
                     </div>
                 </div>
@@ -73,29 +74,29 @@
                     <div class="col-lg-3 col-6">
                         <div class="counter-card box-shadow">
                             <i class="flaticon-online-course"></i>
-                            <h3><span class="odometer" data-count="15000">00000</span>+</h3>
-                            <p>Courses & videos</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="counter-card box-shadow">
-                            <i class="flaticon-student"></i>
-                            <h3><span class="odometer" data-count="145000">000000</span>+</h3>
-                            <p>Students enrolled</p>
+                            <h3><span class="odometer" data-count="{{ $jumlahDigital }}">00000</span></h3>
+                            <p>Buku Digital</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6">
                         <div class="counter-card box-shadow">
                             <i class="flaticon-online-course-1"></i>
-                            <h3><span class="odometer" data-count="10000">00000</span>+</h3>
-                            <p>Courses instructors</p>
+                            <h3><span class="odometer" data-count="{{ $jumlahFisik }}">000000</span></h3>
+                            <p>Buku Fisik</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="counter-card box-shadow">
+                            <i class="flaticon-student"></i>
+                            <h3><span class="odometer" data-count="{{$jumlahUser}}">00000</span></h3>
+                            <p>User Yang Terdaftar</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6">
                         <div class="counter-card box-shadow">
                             <i class="flaticon-customer-satisfaction"></i>
-                            <h3><span class="odometer" data-count="100">000</span>%</h3>
-                            <p>Satisfaction rate</p>
+                            <h3><span class="odometer" data-count="{{ $jumlahJenis }}">000</span></h3>
+                            <p>Kategori Buku yang Tersedia</p>
                         </div>
                     </div>
                 </div>
@@ -104,7 +105,7 @@
         <!-- Counter Area End -->
 
         <!-- Testimonials Area -->
-        <div class="testimonials-area section-bg pt-100 pb-100">
+        {{-- <div class="testimonials-area section-bg pt-100 pb-100">
             <div class="container">
                 <div class="section-title text-center">
                     <span>TESTIMONIAL</span>
@@ -177,14 +178,15 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Testimonials Area End -->
 
+
         <!-- Instructors Area -->
-        <!-- <div class="instructors-area pb-70">
+        <div class="instructors-area pb-70">
             <div class="container">
                 <div class="section-title text-center mb-45">
-                    <h2>Meet our top instructor</h2>
+                    <h2>Susunan Pengurus Perpustakaan Cahaya Dunia</h2>
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -205,19 +207,9 @@
                                             <i class="ri-instagram-line"></i>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="https://twitter.com/" target="_blank">
-                                            <i class="ri-twitter-fill"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.linkedin.com/" target="_blank">
-                                            <i class="ri-linkedin-box-line"></i>
-                                        </a>
-                                    </li>
                                 </ul>
-                                <h3><a href="instructors-details.html">Sally welch</a></h3>
-                                <span>Web designer</span>
+                                <h3><a href="#">Sally welch</a></h3>
+                                <span>Ketua</span>
                             </div>
                         </div>
                     </div>
@@ -250,8 +242,8 @@
                                         </a>
                                     </li>
                                 </ul>
-                                <h3><a href="instructors-details.html">Jesse joslin</a></h3>
-                                <span>Content strategist</span>
+                                <h3><a href="#">Jesse joslin</a></h3>
+                                <span>Sekertaris</span>
                             </div>
                         </div>
                     </div>
@@ -289,6 +281,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-md-6">
                         <div class="instructors-card">
                             <a href="instructors-details.html">
@@ -323,8 +316,10 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- Instructors Area End -->
+
 @endsection

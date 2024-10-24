@@ -46,6 +46,20 @@
           </div>
         </div>
       </li>
+      <li class="nav-item {{ Request::is('tambah-agenda','daftar-agenda') ? 'active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap3"
+          aria-expanded="true" aria-controls="collapseBootstrap3">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>Agenda</span>
+        </a>
+        <div id="collapseBootstrap3" class="collapse {{ Request::is('tambah-buku-fisik','daftar-buku-fisik') ? 'show' : '' }}" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Agenda</h6>
+            <a class="collapse-item {{ Request::is('tambah-agenda') ? 'active' : '' }}" href="{{ url('/tambah-agenda') }}">Tambah Agenda</a>
+            <a class="collapse-item {{ Request::is('daftar-agenda') ? 'active' : '' }}" href="{{ url('/daftar-agenda') }}">Daftar Agenda</a>
+          </div>
+        </div>
+      </li>
       <li class="nav-item {{ Request::is('daftar-jenis-buku') ? 'active' : '' }}">
         <a class="nav-link" href="/daftar-jenis-buku" >
           <i class="fas fa-fw fa-table"></i>

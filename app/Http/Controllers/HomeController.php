@@ -27,7 +27,11 @@ class HomeController extends Controller
     public function about()
     {
         $jenis_bukus = Jenis_Buku::all();
-        return view('feature.about.about',compact('jenis_bukus'));
+        $jumlahDigital = Buku_Digital::count();
+        $jumlahFisik = Buku_Fisik::count();
+        $jumlahJenis = Jenis_Buku::count();
+        $jumlahUser = Jenis_Buku::count();
+        return view('feature.about.about',compact('jenis_bukus','jumlahDigital','jumlahFisik','jumlahUser','jumlahJenis'));
     }
 
     // Admin

@@ -88,15 +88,15 @@
                     </div>
                     <div class="col-lg-3 col-6 col-md-3">
                         <div class="counter-content">
-                            <i class="flaticon-student"></i>
+                            <i class="flaticon-online-course-1"></i>
                             <h3><span class="odometer" data-count="{{ $jumlahFisik }}">000000</span></h3>
                             <p>Buku Fisik</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6 col-md-3">
                         <div class="counter-content">
-                            <i class="flaticon-online-course-1"></i>
-                            <h3><span class="odometer" data-count="10000">00000</span></h3>
+                            <i class="flaticon-student"></i>
+                            <h3><span class="odometer" data-count="{{ $jumlahUser }}">00000</span></h3>
                             <p>User yang Terdaftar</p>
                         </div>
                     </div>

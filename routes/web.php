@@ -45,7 +45,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
         Route::get('/', [HomeController::class, 'index'])->name('home');
         Route::get('/about', [HomeController::class, 'about'])->name('about');
         Route::get('/contact', [ContactUsController::class, 'contact']);
-        // Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
+        Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
 
 
 //Digital Book
@@ -81,6 +81,15 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
         Route::get('/buku-fisik', [PhysicBookController::class, 'index'])->name('buku.fisik');
         Route::get('/buku-fisik-detail', [PhysicBookController::class, 'detail'])->name('buku.fisik.detail');
         Route::get('/search', [PhysicBookController::class, 'ajaxSearch'])->name('buku.ajaxSearch');
+//Agenda
+    //Admin
+    Route::get('/tambah-agenda', [AgendaController::class, 'tambah_agenda'])->name('tambah.agenda');
+    Route::get('/daftar-agenda', [AgendaController::class, 'daftar_agenda'])->name('daftar.agenda');
+    Route::post('/tambah-agenda-store', [AgendaController::class, 'tambah_agenda_store']);
+    Route::delete('/agenda/{id}', [AgendaController::class, 'destroy'])->name('agenda.hapus');
+    Route::put('/agenda/{id}', [AgendaController::class, 'update_agenda'])->name('agenda.update');
+    Route::get('/agenda-detail/{id}', [AgendaController::class, 'agenda_detail'])->name('agenda.detail');
+
 
         Route::get('/dashboard', function () {
             return view('dashboard');
