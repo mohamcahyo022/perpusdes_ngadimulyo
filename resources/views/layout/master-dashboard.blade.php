@@ -7,22 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="img/logo/logo.png" rel="icon">
+
+    <link href="{{ asset('img/logo/logo.png') }}" rel="icon">
     <title>RuangAdmin - Dashboard</title>
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="css/ruang-admin.min.css" rel="stylesheet">
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/ruang-admin.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <!-- Trix CSS -->
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+
     <style>
         trix-toolbar [data-trix-button-group="file-tools"] {
             display: none;
         }
-      </style>
-
+    </style>
 </head>
 
 <body id="page-top">
@@ -36,16 +39,15 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="js/ruang-admin.min.js"></script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('js/ruang-admin.min.js') }}"></script>
+    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
     <!-- Page level custom scripts -->
     <script>
@@ -56,15 +58,14 @@
 
         // Script untuk menampilkan nama file yang dipilih
         document.querySelectorAll('.custom-file-input').forEach(function(input) {
-                input.addEventListener('change', function (e) {
-                    // Pastikan file ada
-                    if (e.target.files.length > 0) {
-                        var fileName = e.target.files[0].name;
-                        var nextSibling = e.target.nextElementSibling;
-                        nextSibling.innerText = fileName;
-                    }
-                });
+            input.addEventListener('change', function (e) {
+                if (e.target.files.length > 0) {
+                    var fileName = e.target.files[0].name;
+                    var nextSibling = e.target.nextElementSibling;
+                    nextSibling.innerText = fileName;
+                }
             });
+        });
     </script>
 
     @if(session('success'))
@@ -105,13 +106,11 @@
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Submit form jika konfirmasi hapus diberikan
                     document.getElementById('deleteForm' + id).submit();
                 }
             });
         }
     </script>
-
 </body>
 
 </html>

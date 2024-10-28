@@ -37,7 +37,6 @@
                     <div class="col-lg-6">
                         <div class="enrolled-content mb-30">
                             <div class="section-title">
-                                {{-- <span>WHO WE ARE</span> --}}
                                 <h2>Perpustakaan Desa Cahaya Dunia</h2>
                                 <p>
                                     Perpustakaan Desa Cahaya Dunia merupakan pusat pembelajaran dan pengembangan masyarakat di Desa Ngadimulyo. Dibangun dengan tujuan untuk memberikan akses literasi dan informasi kepada seluruh warga, perpustakaan ini menjadi tempat bertumbuhnya pengetahuan dan kreativitas.

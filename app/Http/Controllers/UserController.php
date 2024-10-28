@@ -18,4 +18,15 @@ class UserController extends Controller
         $totalMasukanUser = Buku_Kontak::count();
         return view('admin.dashboard', compact('totalBukuDigital', 'totalBukuFisik', 'totalUser', 'totalMasukanUser'));
     }
+
+    public function kelola_user()
+    {
+        $users = User::all();
+        return view('admin.daftar_user', compact('users'));
+    }
+
+    public function error404()
+    {
+        return view('admin.404', compact('users'));
+    }
 }

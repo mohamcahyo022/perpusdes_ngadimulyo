@@ -7,39 +7,20 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <ul class="navbar-nav ml-auto">
-                    {{-- <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-search fa-fw"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                        aria-labelledby="searchDropdown">
-                        <form class="navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-1 small"
-                                    placeholder="What do you want to look for?" aria-label="Search"
-                                    aria-describedby="basic-addon2" style="border-color: #3f51b5;">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li> --}}
-
                     <div class="topbar-divider d-none d-sm-block"></div>
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
-                            <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+                            <img class="img-profile rounded-circle" src="{{ asset('img/boy.png') }}" style="max-width: 60px">
+                            <span class="ml-2 d-none d-lg-inline text-white small">{{ Auth::user()->nama_lengkap }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-
                             <div class="dropdown-divider"></div>
+                            <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                                <i class="fas fa-user-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profil
+                            </a>
                             <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
                                 data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -53,7 +34,7 @@
             <!-- Container Fluid-->
             <div class="container-fluid" id="container-wrapper">
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">DataTables</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Daftar Buku Fisik</h1>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
                         <li class="breadcrumb-item">Tables</li>
@@ -67,7 +48,37 @@
                     <div class="col-lg-12">
                         <div class="card mb-4">
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">DataTables with Hover</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Daftar Buku Fisik</h6>
+                            </div>
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <a href="{{ route('buku.fisik.export') }}" class="btn btn-success btn-sm">Export Excel</a>
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#importModal">Import Excel</button>
+                            </div>
+                            <!-- Modal Import Excel -->
+                            <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="importModalLabel">Import Buku Fisik</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{ route('buku.fisik.import') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="file">Pilih File Excel</label>
+                                                    <input type="file" name="file" class="form-control" id="file" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-primary">Import</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                             <div class="table-responsive p-3">
                                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
@@ -214,9 +225,11 @@
                                 <p>Are you sure you want to logout?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary"
-                                    data-dismiss="modal">Cancel</button>
-                                <a href="/" class="btn btn-primary">Logout</a>
+                                <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                                    @csrf
+                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Logout</button>
+                                </form>
                             </div>
                         </div>
                     </div>

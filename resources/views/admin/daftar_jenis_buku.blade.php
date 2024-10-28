@@ -11,13 +11,17 @@
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
-                        <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+                        <img class="img-profile rounded-circle" src="{{ asset('img/boy.png') }}" style="max-width: 60px">
+                        <span class="ml-2 d-none d-lg-inline text-white small">{{ Auth::user()->nama_lengkap }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                         aria-labelledby="userDropdown">
 
                         <div class="dropdown-divider"></div>
+                        <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                            <i class="fas fa-user-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profil
+                        </a>
                         <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
                             data-target="#logoutModal">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -62,7 +66,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/tambah-jenis-buku" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('jenis.buku.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <label for="judul_buku">Jenis Buku</label>
@@ -95,10 +99,10 @@
                                         <td class="text-center">{{ $jenis->jenis_buku }}</td>
                                         <td class="text-center">
                                             <a class="btn btn-warning btn-sm text-white" style="cursor: pointer;" data-toggle="modal" data-target="#editModal{{ $jenis->id }}">Edit</a>
-                                            <form action="{{ route('jenis.hapus', $jenis->id) }}" method="POST" style="display:inline;">
+                                            <form id="deleteForm{{ $jenis->id }}" action="{{ route('jenis.buku.hapus', $jenis->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $jenis->id }})">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -114,7 +118,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('jenis.edit', $jenis->id) }}" method="POST" enctype="multipart/form-data">
+                                                        <form action="{{ route('jenis.buku.edit', $jenis->id) }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="form-group">
@@ -150,9 +154,11 @@
                             <p>Are you sure you want to logout?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary"
-                                data-dismiss="modal">Cancel</button>
-                            <a href="/" class="btn btn-primary">Logout</a>
+                            <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                                @csrf
+                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Logout</button>
+                            </form>
                         </div>
                     </div>
                 </div>

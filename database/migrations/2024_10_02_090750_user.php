@@ -16,11 +16,21 @@ return new class extends Migration
             $table->string('username')->unique(); // kolom username
             $table->string('nama_lengkap'); // kolom nama lengkap
             $table->string('email')->unique(); // kolom email
-            $table->string('nomor_wa')->nullable(); // kolom nomor WA, boleh kosong
             $table->string('password'); // kolom password
             $table->string('role')->default('user'); // kolom role, default ke 'user'
             $table->timestamps(); // kolom untuk created_at dan updated_at
         });
+
+        // Insert data jenis buku after table creation
+        DB::table('users')->insert([
+            [
+                'username' => 'admin',
+                'nama_lengkap' => 'admin',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('admin123'), // Use Hash::make for password hashing
+                'role' => 'admin',
+            ]
+        ]);
     }
 
     /**

@@ -60,7 +60,7 @@ class AgendaController extends Controller
         // Simpan data ke database
         $agenda->save();
 
-        return redirect()->route('daftar.agenda')->with('success', 'Data agenda berhasil ditambahkan');
+        return redirect()->route('agenda.daftar')->with('success', 'Data agenda berhasil ditambahkan');
     }
 
     public function update_agenda(Request $request, $id)

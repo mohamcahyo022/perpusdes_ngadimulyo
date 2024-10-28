@@ -11,7 +11,7 @@ class Buku_Fisik extends Model
     protected $fillable = [
         'judul_buku',
         'jenis_buku',
-        'penulis_buku',
+        'penulis',
         'penerbit',
         'tahun_terbit',
         'nomor_buku',

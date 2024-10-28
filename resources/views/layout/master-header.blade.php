@@ -1,110 +1,95 @@
-    <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+<!-- Sidebar -->
+<ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
         <div class="sidebar-brand-icon">
-          <img src="img/logo/logo2.png">
+            <img src="{{ asset('img/logo/logo2.png') }}">
         </div>
         <div class="sidebar-brand-text mx-3">RuangAdmin</div>
-      </a>
-      <hr class="sidebar-divider my-0">
-      <li class="nav-item {{ Request::is('admin') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('/admin') }}">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
-      </li>
-      <hr class="sidebar-divider">
-      <div class="sidebar-heading">
-        Features
-      </div>
-      <li class="nav-item {{ Request::is('tambah-buku-digital','daftar-buku-digital') ? 'active' : '' }}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
-          aria-expanded="true" aria-controls="collapseBootstrap1">
-          <i class="far fa-fw fa-window-maximize"></i>
-          <span>Buku Digital</span>
+    </a>
+
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item {{ Request::is('admin') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
         </a>
-        <div id="collapseBootstrap1" class="collapse {{ Request::is('tambah-buku-digital','daftar-buku-digital') ? 'show' : '' }}" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Buku Digital</h6>
-            <a class="collapse-item {{ Request::is('tambah-buku-digital') ? 'active' : '' }}" href="{{ url('/tambah-buku-digital') }}">Tambah Buku Digital</a>
-            <a class="collapse-item {{ Request::is('daftar-buku-digital') ? 'active' : '' }}" href="{{ url('/daftar-buku-digital') }}">Daftar Buku Digital</a>
-            <a class="collapse-item {{ Request::is('daftar-buku-dibaca') ? 'active' : '' }}" href="{{ url('/daftar-buku-dibaca') }}">Daftar Sering Dibaca</a>
-            <a class="collapse-item {{ Request::is('daftar-buku-terfavorit') ? 'active' : '' }}" href="{{ url('/daftar-buku-terfavorit') }}">Daftar Terfavorit</a>
-          </div>
+    </li>
+
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">Features</div>
+
+    <!-- Buku Digital -->
+    <li class="nav-item {{ Request::is('admin/buku-digital/*') ? 'active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDigitalBooks"
+            aria-expanded="true" aria-controls="collapseDigitalBooks">
+            <i class="far fa-fw fa-window-maximize"></i>
+            <span>Buku Digital</span>
+        </a>
+        <div id="collapseDigitalBooks" class="collapse {{ Request::is('admin/buku-digital/*') ? 'show' : '' }}" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Buku Digital</h6>
+                <a class="collapse-item {{ Request::is('admin/buku-digital/tambah') ? 'active' : '' }}" href="{{ route('buku.digital.tambah') }}">Tambah Buku Digital</a>
+                <a class="collapse-item {{ Request::is('admin/buku-digital/daftar') ? 'active' : '' }}" href="{{ route('buku.digital.daftar') }}">Daftar Buku Digital</a>
+                <a class="collapse-item {{ Request::is('admin/buku-digital/dibaca') ? 'active' : '' }}" href="{{ route('buku.digital.dibaca') }}">Daftar Sering Dibaca</a>
+                <a class="collapse-item {{ Request::is('admin/buku-digital/terfavorit') ? 'active' : '' }}" href="{{ route('buku.digital.terfavorit') }}">Daftar Terfavorit</a>
+            </div>
         </div>
-      </li>
-      <li class="nav-item {{ Request::is('tambah-buku-fisik','daftar-buku-fisik') ? 'active' : '' }}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap2"
-          aria-expanded="true" aria-controls="collapseBootstrap2">
-          <i class="far fa-fw fa-window-maximize"></i>
-          <span>Buku Fisik</span>
+    </li>
+
+    <!-- Buku Fisik -->
+    <li class="nav-item {{ Request::is('admin/buku-fisik/*') ? 'active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePhysicBooks"
+            aria-expanded="true" aria-controls="collapsePhysicBooks">
+            <i class="far fa-fw fa-window-maximize"></i>
+            <span>Buku Fisik</span>
         </a>
-        <div id="collapseBootstrap2" class="collapse {{ Request::is('tambah-buku-fisik','daftar-buku-fisik') ? 'show' : '' }}" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Buku Fisik</h6>
-            <a class="collapse-item {{ Request::is('tambah-buku-fisik') ? 'active' : '' }}" href="{{ url('/tambah-buku-fisik') }}">Tambah Buku Fisik</a>
-            <a class="collapse-item {{ Request::is('daftar-buku-fisik') ? 'active' : '' }}" href="{{ url('/daftar-buku-fisik') }}">Daftar Buku Fisik</a>
-          </div>
+        <div id="collapsePhysicBooks" class="collapse {{ Request::is('admin/buku-fisik/*') ? 'show' : '' }}" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Buku Fisik</h6>
+                <a class="collapse-item {{ Request::is('admin/buku-fisik/tambah') ? 'active' : '' }}" href="{{ route('buku.fisik.tambah') }}">Tambah Buku Fisik</a>
+                <a class="collapse-item {{ Request::is('admin/buku-fisik/daftar') ? 'active' : '' }}" href="{{ route('buku.fisik.daftar') }}">Daftar Buku Fisik</a>
+            </div>
         </div>
-      </li>
-      <li class="nav-item {{ Request::is('tambah-agenda','daftar-agenda') ? 'active' : '' }}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap3"
-          aria-expanded="true" aria-controls="collapseBootstrap3">
-          <i class="far fa-fw fa-window-maximize"></i>
-          <span>Agenda</span>
+    </li>
+
+    <!-- Agenda -->
+    <li class="nav-item {{ Request::is('admin/agenda/*') ? 'active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAgenda"
+            aria-expanded="true" aria-controls="collapseAgenda">
+            <i class="far fa-fw fa-window-maximize"></i>
+            <span>Agenda</span>
         </a>
-        <div id="collapseBootstrap3" class="collapse {{ Request::is('tambah-buku-fisik','daftar-buku-fisik') ? 'show' : '' }}" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Agenda</h6>
-            <a class="collapse-item {{ Request::is('tambah-agenda') ? 'active' : '' }}" href="{{ url('/tambah-agenda') }}">Tambah Agenda</a>
-            <a class="collapse-item {{ Request::is('daftar-agenda') ? 'active' : '' }}" href="{{ url('/daftar-agenda') }}">Daftar Agenda</a>
-          </div>
+        <div id="collapseAgenda" class="collapse {{ Request::is('admin/agenda/*') ? 'show' : '' }}" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Agenda</h6>
+                <a class="collapse-item {{ Request::is('admin/agenda/tambah') ? 'active' : '' }}" href="{{ route('agenda.tambah') }}">Tambah Agenda</a>
+                <a class="collapse-item {{ Request::is('admin/agenda/daftar') ? 'active' : '' }}" href="{{ route('agenda.daftar') }}">Daftar Agenda</a>
+            </div>
         </div>
-      </li>
-      <li class="nav-item {{ Request::is('daftar-jenis-buku') ? 'active' : '' }}">
-        <a class="nav-link" href="/daftar-jenis-buku" >
-          <i class="fas fa-fw fa-table"></i>
-          <span>Daftar Jenis Buku</span>
+    </li>
+
+    <!-- Jenis Buku -->
+    <li class="nav-item {{ Request::is('admin/jenis-buku') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('jenis.buku.daftar') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Daftar Jenis Buku</span>
         </a>
-      </li>
-      <li class="nav-item {{ Request::is('daftar-masukan') ? 'active' : '' }}">
-        <a class="nav-link {{ Request::is('masukan') ? 'active' : '' }}" href="/daftar-masukan" >
-          <i class="fas fa-fw fa-table"></i>
-          <span>Saran Dan Masukan</span>
+    </li>
+
+    <!-- Saran dan Masukan -->
+    <li class="nav-item {{ Request::is('admin/masukan/*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('masukan.daftar') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Saran dan Masukan</span>
         </a>
-      </li>
-      <li class="nav-item {{ Request::is('kelola-user') ? 'active' : '' }}" href="/kelola-user">
-        <a class="nav-link" href="ui-colors.html">
-          <i class="fas fa-fw fa-palette"></i>
-          <span>Kelola User</span>
+    </li>
+
+    <!-- Kelola User -->
+    <li class="nav-item {{ Request::is('admin/kelola-user') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.kelola.user') }}">
+            <i class="fas fa-fw fa-palette"></i>
+            <span>Kelola User</span>
         </a>
-      </li>
-      <!-- <hr class="sidebar-divider">
-      <div class="sidebar-heading">
-        Examples
-      </div>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
-          aria-controls="collapsePage">
-          <i class="fas fa-fw fa-columns"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Example Pages</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span>
-        </a>
-      </li>
-      <hr class="sidebar-divider">
-      <div class="version" id="version-ruangadmin"></div> -->
-    </ul>
-    <!-- Sidebar -->
+    </li>
+</ul>
+<!-- Sidebar -->

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BukuFisikExport;
+use App\Imports\BukuFisikImport;
 use App\Models\Buku_Fisik;
 use App\Models\Jenis_Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PhysicBookController extends Controller
 {
@@ -77,7 +80,7 @@ class PhysicBookController extends Controller
         // Simpan data ke database
         $buku->save();
 
-        return redirect()->route('daftar.buku.fisik')->with('success', 'Data buku berhasil ditambahkan');
+        return redirect()->route('buku.fisik.daftar')->with('success', 'Data buku berhasil ditambahkan');
     }
 
     public function update_fisik(Request $request, $id)
@@ -129,5 +132,19 @@ class PhysicBookController extends Controller
         return redirect()->back()->with('success', 'Data buku berhasil dihapus');
     }
 
+    public function export()
+    {
+        return Excel::download(new BukuFisikExport, 'BukuFisik.xlsx');
+    }
 
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        Excel::import(new BukuFisikImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Data Berhasil Diimpor.');
+    }
 }

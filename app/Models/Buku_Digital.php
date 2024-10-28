@@ -12,9 +12,10 @@ class Buku_Digital extends Model
     protected $fillable = [
         'judul_buku',
         'jenis_buku',
-        'penulis_buku',
+        'penulis',
         'penerbit',
         'tahun_terbit',
+        'sinopsis',
         'file_buku',
         'cover_buku',
     ];

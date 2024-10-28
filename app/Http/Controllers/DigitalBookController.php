@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BukuDigitalExport;
+use App\Imports\BukuDigitalImport;
 use Illuminate\Http\Request;
 use App\Models\Buku_Digital;
 use App\Models\Jenis_Buku;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class DigitalBookController extends Controller
@@ -95,7 +98,7 @@ class DigitalBookController extends Controller
         // Simpan data ke database
         $buku->save();
 
-        return redirect()->to('/daftar-buku-digital')->with('success', 'Data buku berhasil disimpan!');
+        return redirect()->to(route('buku.digital.daftar'))->with('success', 'Data buku berhasil disimpan!');
     }
 
     public function update(Request $request, $id)
@@ -195,5 +198,21 @@ class DigitalBookController extends Controller
         $jenis_bukus = Jenis_Buku::all();
 
         return view('feature.buku.buku-digital', compact('bukus', 'jumlahBuku', 'jenis_bukus'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new BukuDigitalExport, 'BukuDigital.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        Excel::import(new BukuDigitalImport, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Data Berhasil Diimport.');
     }
 }

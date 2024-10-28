@@ -24,81 +24,100 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-//Login dan Register
-    //Admin
-    //User
-        Route::get('/login', [LoginController::class, 'index'])->name('login');
-        Route::get('/register', [RegisterController::class, 'index'])->name('register');
+// ---------------------- USER ROUTES (No Login Required) ----------------------
 
-//Dashboard
-    //Admin
-        Route::get('/admin', [UserController::class, 'index']);
-        Route::get('/kelol-user', [HomeController::class, 'kelola_user']);
-    // Masukkan
-        Route::get('/daftar-masukan', [ContactUsController::class, 'kontak_us']);
-        Route::post('/kirim-masukkan', [ContactUsController::class, 'store'])->name('masukkan.store');
-        Route::delete('/masukkan/{id}', [ContactUsController::class, 'destroy'])->name('masukkan.hapus');
+// Agenda (User)
+Route::get('/api/check-login', function (Request $request) {
+    return response()->json(['isLoggedIn' => auth()->check()]);
+});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
+Route::get('/agenda-detail/{id}', [AgendaController::class, 'agenda_detail'])->name('agenda.detail');
+Route::get('/contact', [ContactUsController::class, 'contact'])->name('contact');
+Route::post('/kirim', [ContactUsController::class, 'store'])->name('masukan.store');
+Route::get('/404', [UserController::class, 'error404'])->name('error404');
 
+// Buku Digital (User)
+Route::prefix('buku-digital')->group(function () {
+    Route::get('/', [DigitalBookController::class, 'index'])->name('buku.digital');
+    Route::get('/detail/{id}', [DigitalBookController::class, 'detail'])->name('buku.digital.detail');
+    Route::get('/jenis/{id}', [DigitalBookController::class, 'filterByJenis'])->name('buku.digital.jenis');
+    Route::get('/baca/{id}', [DigitalBookController::class, 'bacaBuku'])->name('buku.baca');
+});
 
+// Buku Fisik (User)
+Route::prefix('buku-fisik')->group(function () {
+    Route::get('/', [PhysicBookController::class, 'index'])->name('buku.fisik');
+    Route::get('/detail', [PhysicBookController::class, 'detail'])->name('buku.fisik.detail');
+    Route::get('/search', [PhysicBookController::class, 'ajaxSearch'])->name('buku.ajaxSearch');
+});
 
-    //User
-        Route::get('/', [HomeController::class, 'index'])->name('home');
-        Route::get('/about', [HomeController::class, 'about'])->name('about');
-        Route::get('/contact', [ContactUsController::class, 'contact']);
-        Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
+//User
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+// ---------------------- ADMIN ROUTES (Protected by Middleware) ----------------------
 
-//Digital Book
-    //Admin
-        Route::get('/daftar-buku-digital', [DigitalBookController::class, 'daftar_buku_digital']);
-        Route::get('/tambah-buku-digital', [DigitalBookController::class, 'tambah_buku_digital']);
-        Route::get('/daftar-buku-dibaca', [DigitalBookController::class, 'daftar_buku_dibaca']);
+Route::middleware(['admin'])->group(function () {
 
-        Route::get('/daftar-jenis-buku', [JenisBukuController::class, 'daftar_jenis_buku']);
-        Route::post('/tambah-jenis-buku', [JenisBukuController::class, 'tambah_jenis_buku']);
-        Route::put('/jenis-buku/{id}', [JenisBukuController::class, 'edit_jenis_buku'])->name('jenis.edit');
-        Route::delete('/jenis-buku/{id}', [JenisBukuController::class, 'hapus_jenis_buku'])->name('jenis.hapus');
-        Route::get('/daftar-buku-terfavorit', [DigitalBookController::class, 'daftar_buku_terfavorit']);
-        Route::post('/tambah-buku-digital-store', [DigitalBookController::class, 'store']);
-        Route::put('/buku-digital/{id}', [DigitalBookController::class, 'update'])->name('buku.update');
-        Route::delete('/buku-digital/{id}', [DigitalBookController::class, 'destroy'])->name('buku.hapus');
+    // Dashboard & User Management
+    Route::get('/admin', [UserController::class, 'index'])->name('admin.dashboard');
+    Route::get('admin/kelola-user', [UserController::class, 'kelola_user'])->name('admin.kelola.user');
 
-    //User
-        Route::get('/buku-digital', [DigitalBookController::class, 'index'])->name('buku.digital');
-        Route::get('/buku-digital-detail/{id}', [DigitalBookController::class, 'detail'])->name('buku.digital.detail');
-        Route::get('/buku-digital-jenis/{id}', [DigitalBookController::class, 'filterByJenis'])->name('buku.digital.jenis');
-        Route::get('/baca-buku/{id}', [DigitalBookController::class, 'bacaBuku'])->name('buku.baca');
+    Route::put('admin/{id}', [UserController::class, 'update'])->name('admin.kelola.user.edit');
+    Route::delete('admin/{id}}', [UserController::class, 'destroy'])->name('admin.kelola.user.destroy');
 
+    // Masukan (Feedback)
+    Route::prefix('admin/masukan')->group(function () {
+        Route::get('/daftar', [ContactUsController::class, 'kontak_us'])->name('masukan.daftar');
+        Route::delete('/{id}', [ContactUsController::class, 'destroy'])->name('masukan.hapus');
+    });
 
-//Offline Book
-    //Admin
-        Route::get('/daftar-buku-fisik', [PhysicBookController::class, 'daftar_buku_fisik'])->name('daftar.buku.fisik');
-        Route::get('/tambah-buku-fisik', [PhysicBookController::class, 'tambah_buku_fisik']);
-        Route::post('/tambah-buku-fisik-store', [PhysicBookController::class, 'store']);
-        Route::put('/buku/{id}', [PhysicBookController::class, 'update_fisik'])->name('buku.fisik.update');
-        Route::delete('/buku/{id}', [PhysicBookController::class, 'destroy'])->name('buku.fisik.hapus');
-    //User
-        Route::get('/buku-fisik', [PhysicBookController::class, 'index'])->name('buku.fisik');
-        Route::get('/buku-fisik-detail', [PhysicBookController::class, 'detail'])->name('buku.fisik.detail');
-        Route::get('/search', [PhysicBookController::class, 'ajaxSearch'])->name('buku.ajaxSearch');
-//Agenda
-    //Admin
-    Route::get('/tambah-agenda', [AgendaController::class, 'tambah_agenda'])->name('tambah.agenda');
-    Route::get('/daftar-agenda', [AgendaController::class, 'daftar_agenda'])->name('daftar.agenda');
-    Route::post('/tambah-agenda-store', [AgendaController::class, 'tambah_agenda_store']);
-    Route::delete('/agenda/{id}', [AgendaController::class, 'destroy'])->name('agenda.hapus');
-    Route::put('/agenda/{id}', [AgendaController::class, 'update_agenda'])->name('agenda.update');
-    Route::get('/agenda-detail/{id}', [AgendaController::class, 'agenda_detail'])->name('agenda.detail');
+    // Buku Digital (Admin)
+    Route::prefix('admin/buku-digital')->group(function () {
+        Route::get('/daftar', [DigitalBookController::class, 'daftar_buku_digital'])->name('buku.digital.daftar');
+        Route::get('/tambah', [DigitalBookController::class, 'tambah_buku_digital'])->name('buku.digital.tambah');
+        Route::post('/store', [DigitalBookController::class, 'store'])->name('buku.digital.store');
+        Route::get('/export', [DigitalBookController::class, 'export'])->name('buku.digital.export');
+        Route::post('/import', [DigitalBookController::class, 'import'])->name('buku.digital.import');
+        Route::get('/dibaca', [DigitalBookController::class, 'daftar_buku_dibaca'])->name('buku.digital.dibaca');
+        Route::get('/terfavorit', [DigitalBookController::class, 'daftar_buku_terfavorit'])->name('buku.digital.terfavorit');
+        Route::put('/{id}', [DigitalBookController::class, 'update'])->name('buku.digital.update');
+        Route::delete('/{id}', [DigitalBookController::class, 'destroy'])->name('buku.digital.hapus');
+    });
 
+    // Buku Fisik (Admin)
+    Route::prefix('admin/buku-fisik')->group(function () {
+        Route::get('/daftar', [PhysicBookController::class, 'daftar_buku_fisik'])->name('buku.fisik.daftar');
+        Route::get('/tambah', [PhysicBookController::class, 'tambah_buku_fisik'])->name('buku.fisik.tambah');
+        Route::post('/store', [PhysicBookController::class, 'store'])->name('buku.fisik.store');
+        Route::get('/export', [PhysicBookController::class, 'export'])->name('buku.fisik.export');
+        Route::post('/import', [PhysicBookController::class, 'import'])->name('buku.fisik.import');
+        Route::put('/{id}', [PhysicBookController::class, 'update_fisik'])->name('buku.fisik.update');
+        Route::delete('/{id}', [PhysicBookController::class, 'destroy'])->name('buku.fisik.hapus');
+    });
 
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->middleware(['auth', 'verified'])->name('dashboard');
+    // Jenis Buku (Admin)
+    Route::prefix('admin/jenis-buku')->group(function () {
+        Route::get('/', [JenisBukuController::class, 'daftar_jenis_buku'])->name('jenis.buku.daftar');
+        Route::post('/store', [JenisBukuController::class, 'tambah_jenis_buku'])->name('jenis.buku.store');
+        Route::put('/{id}', [JenisBukuController::class, 'edit_jenis_buku'])->name('jenis.buku.edit');
+        Route::delete('/{id}', [JenisBukuController::class, 'hapus_jenis_buku'])->name('jenis.buku.hapus');
+    });
 
-        Route::middleware('auth')->group(function () {
-            Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-            Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-            Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-        });
+    // Agenda (Admin)
+    Route::prefix('admin/agenda')->group(function () {
+        Route::get('/tambah', [AgendaController::class, 'tambah_agenda'])->name('agenda.tambah');
+        Route::post('/store', [AgendaController::class, 'tambah_agenda_store'])->name('agenda.store');
+        Route::get('/daftar', [AgendaController::class, 'daftar_agenda'])->name('agenda.daftar');
+        Route::put('/{id}', [AgendaController::class, 'update_agenda'])->name('agenda.update');
+        Route::delete('/{id}', [AgendaController::class, 'destroy'])->name('agenda.hapus');
+    });
+});
 
-        require __DIR__.'/auth.php';
+// ---------------------- AUTH ROUTES ----------------------
+require __DIR__ . '/auth.php';

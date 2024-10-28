@@ -56,41 +56,60 @@
                                 </ul>
                                 <a href="#" class="default-btn" data-id="{{ $buku->id }}" onclick="bacaBuku({{ $buku->id }})">Baca Buku</a>
 
-                                <!-- Modal untuk menampilkan PDF -->
-                                <div id="pdf-modal" class="pdf-modal" style="display: none;">
-                                    <div class="pdf-modal-content">
-                                        <span class="pdf-close" onclick="closeModal()">&times;</span>
-                                        <iframe id="pdf-frame" src="" width="100%" height="100%" style="border:none;"></iframe>
-                                    </div>
-                                </div>
+<!-- Modal untuk menampilkan PDF -->
+<div id="pdf-modal" class="pdf-modal" style="display: none;">
+    <div class="pdf-modal-content">
+        <span class="pdf-close" onclick="closeModal()">&times;</span>
+        <iframe id="pdf-frame" src="" width="100%" height="100%" style="border:none;"></iframe>
+    </div>
+</div>
 
-                                <script>
-                                function bacaBuku(id) {
-                                    fetch(`/baca-buku/${id}`)
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            document.getElementById('pdf-frame').src = `${data.file_url}#toolbar=0&navpanes=0&scrollbar=0`;
-                                            document.getElementById('pdf-modal').style.display = 'flex';
-                                            document.body.classList.add('modal-open');
-                                            setTimeout(() => {
-                                                document.getElementById('pdf-modal').classList.add('show');
-                                                document.querySelector('.pdf-modal-content').classList.add('show');
-                                            }, 10);
-                                        })
-                                        .catch(error => {
-                                            console.error('Error:', error);
-                                        });
-                                }
+<script>
+    function cekLogin(callback) {
+        fetch('/api/check-login')
+            .then(response => response.json())
+            .then(data => {
+                if (data.isLoggedIn) {
+                    callback();
+                } else {
+                    window.location.href = '/login';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat memeriksa status login.');
+            });
+    }
 
-                                function closeModal() {
-                                    document.getElementById('pdf-modal').classList.remove('show');
-                                    document.querySelector('.pdf-modal-content').classList.remove('show');
-                                    document.body.classList.remove('modal-open');
-                                    setTimeout(() => {
-                                        document.getElementById('pdf-modal').style.display = 'none';
-                                    }, 300);
-                                }
-                                </script>
+    function bacaBuku(id) {
+        cekLogin(() => {
+            fetch(`/buku-digital/baca/${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('pdf-frame').src = `${data.file_url}#toolbar=0&navpanes=0&scrollbar=0`;
+                    document.getElementById('pdf-modal').style.display = 'flex';
+                    document.body.classList.add('modal-open');
+                    setTimeout(() => {
+                        document.getElementById('pdf-modal').classList.add('show');
+                        document.querySelector('.pdf-modal-content').classList.add('show');
+                    }, 10);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    }
+
+    function closeModal() {
+        document.getElementById('pdf-modal').classList.remove('show');
+        document.querySelector('.pdf-modal-content').classList.remove('show');
+        document.body.classList.remove('modal-open');
+        setTimeout(() => {
+            document.getElementById('pdf-modal').style.display = 'none';
+        }, 300);
+    }
+</script>
+
 
                                 <ul class="social-link">
                                     <li class="social-title">Share this course:</li>

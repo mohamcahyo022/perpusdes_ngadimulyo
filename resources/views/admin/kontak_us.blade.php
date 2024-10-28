@@ -12,13 +12,17 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
-                            <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+                            <img class="img-profile rounded-circle" src="{{ asset('img/boy.png') }}" style="max-width: 60px">
+                            <span class="ml-2 d-none d-lg-inline text-white small">{{ Auth::user()->nama_lengkap }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
 
                             <div class="dropdown-divider"></div>
+                            <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                                <i class="fas fa-user-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profil
+                            </a>
                             <a class="dropdown-item" href="javascript:void(0);" data-toggle="modal"
                                 data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -77,7 +81,7 @@
 
                                                 <td class="text-center">
                                                     <form id="deleteForm{{ $pesan->id }}"
-                                                        action="{{ route('masukkan.hapus', $pesan->id) }}" method="POST"
+                                                        action="{{ route('masukan.hapus', $pesan->id) }}" method="POST"
                                                         style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
@@ -136,9 +140,11 @@
                                 <p>Are you sure you want to logout?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-primary"
-                                    data-dismiss="modal">Cancel</button>
-                                <a href="/" class="btn btn-primary">Logout</a>
+                                <form action="{{ route('logout') }}" method="POST" id="logoutForm">
+                                    @csrf
+                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Logout</button>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -60,7 +60,7 @@
                     <h2>Ready to get started?</h2>
                 </div>
                 <div class="contact-form">
-                    <form action="/kirim-masukkan" method="POST">
+                    <form action="{{ route('masukan.store') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-lg-6">

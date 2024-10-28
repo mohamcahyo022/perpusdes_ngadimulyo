@@ -16,6 +16,20 @@ return new class extends Migration
             $table->string('jenis_buku'); // kolom jenis buku
             $table->timestamps(); // kolom untuk created_at dan updated_at
         });
+
+        // Insert data jenis buku setelah tabel dibuat
+        DB::table('jenis__bukus')->insert([
+            ['jenis_buku' => 'Karya Umum'],
+            ['jenis_buku' => 'Filsafat & Psikologi'],
+            ['jenis_buku' => 'Agama'],
+            ['jenis_buku' => 'Ilmu Sosial'],
+            ['jenis_buku' => 'Bahasa'],
+            ['jenis_buku' => 'IPA & Matematika'],
+            ['jenis_buku' => 'Teknologi'],
+            ['jenis_buku' => 'Seni & Rekreasi'],
+            ['jenis_buku' => 'Sastra'],
+            ['jenis_buku' => 'Sejarah & Geografi'],
+        ]);
     }
 
     /**

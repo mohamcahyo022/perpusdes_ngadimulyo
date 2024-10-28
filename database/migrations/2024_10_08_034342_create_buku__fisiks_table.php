@@ -20,7 +20,7 @@ return new class extends Migration
             $table->year('tahun_terbit'); // kolom tahun terbit
             $table->string('nomor_buku')->unique(); // kolom nomor buku
             $table->string('status')->default('Tersedia');; // kolom nomor buku
-            $table->string('cover_buku');
+            $table->string('cover_buku')->nullable();
             $table->timestamps(); // kolom untuk created_at dan updated_at
         });
     }

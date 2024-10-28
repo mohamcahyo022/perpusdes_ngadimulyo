@@ -40,7 +40,7 @@ class JenisBukuController extends Controller
         // Simpan data ke database
         $buku->save();
 
-        return redirect()->back()->with('success', 'Data buku berhasil dihapus!');
+        return redirect()->back()->with('success', 'Data buku berhasil diupdate!');
     }
     public function hapus_jenis_buku($id)
     {
