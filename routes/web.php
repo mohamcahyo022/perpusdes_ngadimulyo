@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\JenisBukuController;
+use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -25,17 +26,20 @@ use Illuminate\Http\Request;
 
 // ---------------------- USER ROUTES (No Login Required) ----------------------
 
-// Agenda (User)
 Route::get('/api/check-login', function (Request $request) {
     return response()->json(['isLoggedIn' => auth()->check()]);
 });
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
-Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda');
-Route::get('/agenda-detail/{id}', [AgendaController::class, 'agenda_detail'])->name('agenda.detail');
 Route::get('/contact', [ContactUsController::class, 'contact'])->name('contact');
 Route::post('/kirim', [ContactUsController::class, 'store'])->name('masukan.store');
 Route::get('/404', [UserController::class, 'error404'])->name('error404');
+
+// Agenda (User)
+Route::prefix('agenda')->group(function () {
+Route::get('/', [AgendaController::class, 'index'])->name('agenda');
+Route::get('/detail/{id}', [AgendaController::class, 'agenda_detail'])->name('agenda.detail');
+});
 
 // Buku Digital (User)
 Route::prefix('buku-digital')->group(function () {
@@ -73,12 +77,6 @@ Route::middleware(['admin'])->group(function () {
 
     Route::put('admin/{id}', [UserController::class, 'update'])->name('admin.kelola.user.edit');
     Route::delete('admin/{id}}', [UserController::class, 'destroy'])->name('admin.kelola.user.destroy');
-
-    // Masukan (Feedback)
-    Route::prefix('admin/masukan')->group(function () {
-        Route::get('/daftar', [ContactUsController::class, 'kontak_us'])->name('masukan.daftar');
-        Route::delete('/{id}', [ContactUsController::class, 'destroy'])->name('masukan.hapus');
-    });
 
     // Buku Digital (Admin)
     Route::prefix('admin/buku-digital')->group(function () {
@@ -119,6 +117,20 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/daftar', [AgendaController::class, 'daftar_agenda'])->name('agenda.daftar');
         Route::put('/{id}', [AgendaController::class, 'update_agenda'])->name('agenda.update');
         Route::delete('/{id}', [AgendaController::class, 'destroy'])->name('agenda.hapus');
+    });
+
+    // Masukan (Feedback)
+    Route::prefix('admin/masukan')->group(function () {
+        Route::get('/daftar', [ContactUsController::class, 'kontak_us'])->name('masukan.daftar');
+        Route::delete('/{id}', [ContactUsController::class, 'destroy'])->name('masukan.hapus');
+    });
+
+    // Pengurus
+    Route::prefix('admin/pengurus')->group(function () {
+        Route::get('/daftar', action: [PengurusController::class, 'index'])->name('pengurus.daftar');
+        Route::post('/tambah', [PengurusController::class, 'store'])->name('pengurus.tambah');
+        Route::put('/{id}', [PengurusController::class, 'update'])->name('pengurus.edit');
+        Route::delete('/{id}', [PengurusController::class, 'destroy'])->name('pengurus.hapus');
     });
 });
 

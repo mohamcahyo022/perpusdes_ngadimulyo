@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku_Fisik;
 use App\Models\Jenis_Buku;
+use App\Models\PengurusPerpus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Buku_Digital;
@@ -32,7 +33,8 @@ class HomeController extends Controller
         $jumlahFisik = Buku_Fisik::count();
         $jumlahJenis = Jenis_Buku::count();
         $jumlahUser = User::count();
-        return view('feature.about.about',compact('jenis_bukus','jumlahDigital','jumlahFisik','jumlahUser','jumlahJenis'));
+        $penguruses = PengurusPerpus::all();
+        return view('feature.about.about',compact('jenis_bukus','jumlahDigital','jumlahFisik','jumlahUser','jumlahJenis','penguruses'));
     }
 
     // Admin

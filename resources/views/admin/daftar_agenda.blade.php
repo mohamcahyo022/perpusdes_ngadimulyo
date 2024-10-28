@@ -54,9 +54,8 @@
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
-                                    @forelse ($agendas as $agenda)
+                                    @foreach ($agendas as $agenda)
                                         <tr>
                                             <td class="text-center">{{ $agenda->judul_agenda }}</td>
                                             <td class="text-center">
@@ -76,11 +75,10 @@
                                                 <form id="deleteForm{{ $agenda->id }}" action="{{ route('agenda.hapus', $agenda->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $agenda->id }})">Hapus</button>
+                                                    <button type="button" class="btn btn-danger btn-sm delete-button" data-id="{{ $agenda->id }}">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
-
                                         <!-- Modal Detail -->
                                         <div class="modal fade" id="detailModal{{ $agenda->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -96,7 +94,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <!-- Modal Edit -->
                                         <div class="modal fade" id="editModal{{ $agenda->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -128,18 +125,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5" class="text-center">Tidak ada data.</td>
-                                        </tr>
-                                    @endforelse
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- Logout Modal -->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog">

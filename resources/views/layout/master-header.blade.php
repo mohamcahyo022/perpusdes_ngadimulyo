@@ -84,6 +84,14 @@
         </a>
     </li>
 
+    <!-- Pengurs Perpus -->
+    <li class="nav-item {{ Request::is('admin/pengurus/*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pengurus.daftar') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Pengurus Perpustakaan</span>
+        </a>
+    </li>
+
     <!-- Kelola User -->
     <li class="nav-item {{ Request::is('admin/kelola-user') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.kelola.user') }}">

@@ -110,135 +110,42 @@
                     <h2>Susunan Pengurus Perpustakaan Cahaya Dunia</h2>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="instructors-card">
-                            <a href="instructors-details.html">
-                                <img src="assets/images/instructors/instructors-img1.jpg" alt="Team Images">
-                            </a>
-                            <div class="content">
-                                <ul class="instructors-social">
-                                    <li class="share-btn"><i class="ri-add-line"></i></li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <i class="ri-facebook-fill"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.instagram.com/" target="_blank">
-                                            <i class="ri-instagram-line"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <h3><a href="#">Sally welch</a></h3>
-                                <span>Ketua</span>
+                    @forelse($penguruses as $pengurus)
+                        <div class="col-lg-3 col-md-6">
+                            <div class="instructors-card">
+                                <a href="instructors-details.html">
+                                    <img src="{{ asset('storage/' . $pengurus->foto) }}" alt="Pengurus Perpus">
+                                </a>
+                                <div class="content">
+                                    <ul class="instructors-social">
+                                        <li class="share-btn"><i class="ri-add-line"></i></li>
+                                        @if($pengurus->facebook)
+                                            <li>
+                                                <a href="{{ $pengurus->facebook }}" target="_blank">
+                                                    <i class="ri-facebook-fill"></i>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if($pengurus->instagram)
+                                            <li>
+                                                <a href="{{ $pengurus->instagram }}" target="_blank">
+                                                    <i class="ri-instagram-line"></i>
+                                                </a>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                    <h3><a href="#">{{ $pengurus->nama }}</a></h3>
+                                    <span>{{ $pengurus->jabatan ?? 'Jabatan tidak tersedia' }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="instructors-card">
-                            <a href="instructors-details.html">
-                                <img src="assets/images/instructors/instructors-img2.jpg" alt="Team Images">
-                            </a>
-                            <div class="content">
-                                <ul class="instructors-social">
-                                    <li class="share-btn"><i class="ri-add-line"></i></li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <i class="ri-facebook-fill"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.instagram.com/" target="_blank">
-                                            <i class="ri-instagram-line"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://twitter.com/" target="_blank">
-                                            <i class="ri-twitter-fill"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.linkedin.com/" target="_blank">
-                                            <i class="ri-linkedin-box-line"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <h3><a href="#">Jesse joslin</a></h3>
-                                <span>Sekertaris</span>
-                            </div>
+                    @empty
+                        <div class="col-12">
+                            <p>Tidak ada instruktur yang tersedia.</p>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="instructors-card">
-                            <a href="instructors-details.html">
-                                <img src="assets/images/instructors/instructors-img3.jpg" alt="Team Images">
-                            </a>
-                            <div class="content">
-                                <ul class="instructors-social">
-                                    <li class="share-btn"><i class="ri-add-line"></i></li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <i class="ri-facebook-fill"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.instagram.com/" target="_blank">
-                                            <i class="ri-instagram-line"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://twitter.com/" target="_blank">
-                                            <i class="ri-twitter-fill"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.linkedin.com/" target="_blank">
-                                            <i class="ri-linkedin-box-line"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <h3><a href="instructors-details.html">Lance altman</a></h3>
-                                <span>Photographer</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="instructors-card">
-                            <a href="instructors-details.html">
-                                <img src="assets/images/instructors/instructors-img4.jpg" alt="Team Images">
-                            </a>
-                            <div class="content">
-                                <ul class="instructors-social">
-                                    <li class="share-btn"><i class="ri-add-line"></i></li>
-                                    <li>
-                                        <a href="https://www.facebook.com/" target="_blank">
-                                            <i class="ri-facebook-fill"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.instagram.com/" target="_blank">
-                                            <i class="ri-instagram-line"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://twitter.com/" target="_blank">
-                                            <i class="ri-twitter-fill"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.linkedin.com/" target="_blank">
-                                            <i class="ri-linkedin-box-line"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <h3><a href="instructors-details.html">Jonquil von</a></h3>
-                                <span>Art director</span>
-                            </div>
-                        </div>
-                    </div>
-
+                    @endforelse
                 </div>
+
             </div>
         </div>
         <!-- Instructors Area End -->

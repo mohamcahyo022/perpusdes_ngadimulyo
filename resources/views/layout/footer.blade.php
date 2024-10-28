@@ -104,15 +104,5 @@
                     </div>
                 </div>
             </div>
-            <div class="copyright-area">
-                <div class="container">
-                    <div class="copy-right-text text-center">
-                        <p>
-                            Copyright <b>Ledu</b> All Rights Reserved
-                            <a href="https://hibootstrap.com/" target="_blank">HiBootstrap</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
         </footer>
         <!-- Footer Area End -->
