@@ -6,9 +6,11 @@ use App\Exports\BukuDigitalExport;
 use App\Imports\BukuDigitalImport;
 use Illuminate\Http\Request;
 use App\Models\Buku_Digital;
+use App\Models\Buku_Favorit;
 use App\Models\Jenis_Buku;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 
 
 class DigitalBookController extends Controller
@@ -27,17 +29,43 @@ class DigitalBookController extends Controller
             $bukus = Buku_Digital::orderBy('created_at', 'desc')->paginate(9);
         } else {
             // Default (semua buku tanpa urutan tertentu)
-            $bukus = Buku_Digital::paginate(9);
+            $bukus = Buku_Digital::paginate(10);
         }
         $jumlahBuku = Buku_Digital::count();
         $jenis_bukus = Jenis_Buku::all();
-        return view('feature.buku.buku-digital', compact('bukus','jumlahBuku', 'jenis_bukus'));
+        return view('feature.buku.buku-digital', compact('bukus', 'jumlahBuku', 'jenis_bukus'));
     }
+
     public function detail($id)
     {
         $buku = Buku_Digital::findOrFail($id);
         $jenis_bukus = Jenis_Buku::all();
-        return view('feature.buku.buku-detail', compact('buku', 'jenis_bukus'));
+
+        $isFavorited = Buku_Favorit::where('id_user', Auth::id())
+            ->where('id_buku', $buku->id)
+            ->exists();
+
+        return view('feature.buku.buku-detail', compact('buku', 'jenis_bukus', 'isFavorited'));
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'keyword' => 'required|string|max:255',
+        ]);
+
+        // Mengambil keyword dari form pencarian
+        $keyword = $request->input('keyword');
+
+        // Melakukan pencarian buku berdasarkan judul atau jenis buku
+        $bukus = Buku_Digital::where('judul_buku', 'LIKE', "%{$keyword}%")->get();
+
+        // Menghitung jumlah buku yang ditemukan
+        $jumlahBuku = $bukus->count();
+        $jenis_bukus = Jenis_Buku::all();
+
+        // Mengirim data ke view
+        return view('feature.buku.buku-search', compact('bukus', 'jumlahBuku','jenis_bukus'));
     }
 
 
@@ -46,7 +74,7 @@ class DigitalBookController extends Controller
     {
         $bukus = Buku_Digital::all();
         $jenis = Jenis_Buku::all();
-        return view('admin.daftar_buku_digital', compact('bukus','jenis'));
+        return view('admin.daftar_buku_digital', compact('bukus', 'jenis'));
     }
 
     public function tambah_buku_digital()
@@ -55,15 +83,53 @@ class DigitalBookController extends Controller
         return view('admin.tambah_buku_digital', compact('bukus'));
     }
 
-    public function daftar_buku_dibaca()
-    {
-        return view('admin.daftar_buku_dibaca');
-    }
+    // public function daftar_buku_dibaca()
+    // {
+    //     return view('admin.daftar_buku_dibaca');
+    // }
 
     public function daftar_buku_terfavorit()
     {
-        return view('admin.daftar_buku_terfavorit');
+        $terfavorit = Buku_Favorit::join('users', 'buku__favorits.id_user', '=', 'users.id')
+            ->join('buku__digitals', 'buku__favorits.id_buku', '=', 'buku__digitals.id')
+            ->select('users.nama_lengkap', 'buku__digitals.judul_buku')
+            ->distinct()
+            ->get();
+
+        return view('admin.daftar_buku_terfavorit', compact('terfavorit'));
     }
+
+
+    public function store_favorit(Request $request)
+    {
+        $request->validate([
+            'id_buku' => 'required|exists:buku__digitals,id',
+        ]);
+
+        $userId = Auth::id();
+        $bukuId = $request->id_buku;
+
+        $existingFavorit = Buku_Favorit::where('id_user', $userId)
+            ->where('id_buku', $bukuId)
+            ->first();
+
+        if ($existingFavorit) {
+            // Jika buku sudah ada di favorit
+            return back()->with('info', 'Buku ini sudah ada di favorit Anda!');
+        }
+
+        // Simpan data ke tabel buku__favorits
+        Buku_Favorit::create([
+            'id_user' => $userId,
+            'id_buku' => $bukuId,
+        ]);
+
+        // Update kolom buku_favorit di tabel buku__digitals
+        Buku_Digital::where('id', $bukuId)->increment('buku_favorit');
+
+        return back()->with('success', 'Buku berhasil ditambahkan ke favorit!');
+    }
+
 
     public function store(Request $request)
     {

@@ -20,7 +20,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <!-- Title -->
         <title>Register - Perpustakaan Desa</title>
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="assets/images/favicon.png">
     </head>
@@ -56,13 +57,14 @@
 
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <input class="form-control" type="password" name="password" placeholder="Password">
+                                                <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <input class="form-control" type="password" name="password_confirmation" placeholder="Confirm Password">
+                                                <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" required>
+                                                <small id="confirmationError" class="text-danger" style="display:none;">Password tidak cocok.</small>
                                             </div>
                                         </div>
 
@@ -101,6 +103,30 @@
         <script src="assets/js/custom.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script>
+            // Check for validation errors
+            @if($errors->any())
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Kesalahan Pendaftaran',
+                    html: '{!! implode('<br>', $errors->all()) !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        </script>
+        <script>
+            document.getElementById('password_confirmation').addEventListener('input', function() {
+                const password = document.getElementById('password').value;
+                const passwordConfirmation = this.value;
+                const confirmationError = document.getElementById('confirmationError');
+
+                if (password !== passwordConfirmation) {
+                    confirmationError.style.display = 'block'; // Show error message
+                } else {
+                    confirmationError.style.display = 'none'; // Hide error message
+                }
+            });
+        </script>
 
     </body>
 </html>

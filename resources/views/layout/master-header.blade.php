@@ -30,7 +30,7 @@
                 <h6 class="collapse-header">Buku Digital</h6>
                 <a class="collapse-item {{ Request::is('admin/buku-digital/tambah') ? 'active' : '' }}" href="{{ route('buku.digital.tambah') }}">Tambah Buku Digital</a>
                 <a class="collapse-item {{ Request::is('admin/buku-digital/daftar') ? 'active' : '' }}" href="{{ route('buku.digital.daftar') }}">Daftar Buku Digital</a>
-                <a class="collapse-item {{ Request::is('admin/buku-digital/dibaca') ? 'active' : '' }}" href="{{ route('buku.digital.dibaca') }}">Daftar Sering Dibaca</a>
+                {{-- <a class="collapse-item {{ Request::is('admin/buku-digital/dibaca') ? 'active' : '' }}" href="{{ route('buku.digital.dibaca') }}">Daftar Sering Dibaca</a> --}}
                 <a class="collapse-item {{ Request::is('admin/buku-digital/terfavorit') ? 'active' : '' }}" href="{{ route('buku.digital.terfavorit') }}">Daftar Terfavorit</a>
             </div>
         </div>

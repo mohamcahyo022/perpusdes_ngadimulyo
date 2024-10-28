@@ -6,12 +6,11 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PhysicBookController;
 use App\Http\Controllers\DigitalBookController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +40,13 @@ Route::get('/404', [UserController::class, 'error404'])->name('error404');
 // Buku Digital (User)
 Route::prefix('buku-digital')->group(function () {
     Route::get('/', [DigitalBookController::class, 'index'])->name('buku.digital');
-    Route::get('/detail/{id}', [DigitalBookController::class, 'detail'])->name('buku.digital.detail');
+    Route::middleware('auth')->group(function () {
+        Route::get('/detail/{id}', [DigitalBookController::class, 'detail'])->name('buku.digital.detail');
+        Route::post('/store', [DigitalBookController::class, 'store_favorit'])->name('buku-digital.store');
+    });
     Route::get('/jenis/{id}', [DigitalBookController::class, 'filterByJenis'])->name('buku.digital.jenis');
     Route::get('/baca/{id}', [DigitalBookController::class, 'bacaBuku'])->name('buku.baca');
+    Route::post('/search-buku', [DigitalBookController::class, 'search'])->name('search.buku');
 });
 
 // Buku Fisik (User)
@@ -84,7 +87,7 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/store', [DigitalBookController::class, 'store'])->name('buku.digital.store');
         Route::get('/export', [DigitalBookController::class, 'export'])->name('buku.digital.export');
         Route::post('/import', [DigitalBookController::class, 'import'])->name('buku.digital.import');
-        Route::get('/dibaca', [DigitalBookController::class, 'daftar_buku_dibaca'])->name('buku.digital.dibaca');
+        // Route::get('/dibaca', [DigitalBookController::class, 'daftar_buku_dibaca'])->name('buku.digital.dibaca');
         Route::get('/terfavorit', [DigitalBookController::class, 'daftar_buku_terfavorit'])->name('buku.digital.terfavorit');
         Route::put('/{id}', [DigitalBookController::class, 'update'])->name('buku.digital.update');
         Route::delete('/{id}', [DigitalBookController::class, 'destroy'])->name('buku.digital.hapus');

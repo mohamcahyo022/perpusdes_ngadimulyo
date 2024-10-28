@@ -16,13 +16,15 @@
                                 banyak dibaca oleh masyarakat.
                             </p>
                             <div class="banner-form-area" data-aos="fade-down" data-aos-delay="900" data-aos-duration="1000" data-aos-once="true">
-                                <form class="banner-form" data-toggle="validator" method="POST">
-                                    <input type="email" class="form-control" placeholder="Cari Buku Anda" name="EMAIL" required autocomplete="off">
+                                <form class="banner-form" id="searchForm" method="POST" action="{{ route('search.buku') }}">
+                                    @csrf
+                                    <input type="text" id="searchInput" class="form-control" placeholder="Cari Buku Anda" name="keyword" required autocomplete="off">
                                     <button class="default-btn" type="submit">
                                         <i class="ri-search-line"></i> Cari Buku
                                     </button>
                                 </form>
                             </div>
+
                         </div>
                     </div>
 
